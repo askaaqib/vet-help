@@ -1,0 +1,101 @@
+@font-face {
+  font-family: glukfogli;
+  src: url(./fonts/gluk_foglihten/Foglihten-068.otf);
+}
+
+@font-face {
+  font-family: glukfogli-regular;
+  src: url(./fonts/gluk_foglihten/gluk_rawengulksans/RawengulkSans-094.otf);
+}
+
+@font-face {
+  font-family: roboto;
+  src: url(./fonts/gluk_foglihten/roboto/Roboto-Black.ttf);
+}
+
+@font-face {
+  font-family: roboto-light;
+  src: url(./fonts/gluk_foglihten/roboto/Roboto-Light.ttf);
+}
+
+@font-face {
+  font-family: roboto-regular;
+  src: url(./fonts/gluk_foglihten/roboto/Roboto-Regular.ttf);
+}
+
+@font-face {
+  font-family: roboto-thin;
+  src: url(./fonts/gluk_foglihten/roboto/Roboto-Thin.ttf);
+}
+
+
+
+body {
+  font-family: roboto-light !important;
+  background-image: url(./img/store.jpg);
+  background-size: cover;
+}
+
+
+
+.App {
+  text-align: center;
+  
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.logo-width {
+  width: 60px;
+}
+
+.header-bg {
+  background-color : #d6121bd9!important;
+  box-shadow : 0px 1px 5px 1px #777475;
+}
+
+.btn_dashboard{
+  color: #f10505 !important;
+  background-color: #ffffff !important;
+  border-color: #ff0047 !important;
+  display:block !important;
+}
+
+.dash_card {
+  background: #ead1ab36;
+  border: none;
+  box-shadow: 0px 3px 8px 1px lightgrey;
+}
+
+.dash-main-card {
+  box-shadow: 0px 1px 7px 1px #b1acac75;
+}
