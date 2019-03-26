@@ -4,6 +4,7 @@ import express from 'express';
 import passport from 'passport';
 // import * as todoController from '../controllers/vet.server.controller';
 import * as UserController from '../controllers/user';
+import * as PetController from '../controllers/petController';
 // get an instance of express router
 
 const router = express.Router();
@@ -20,5 +21,6 @@ router.route('/login')
       .post(UserController.login);
 router.route('/me')
       .get(passport.authenticate('jwt', { session: false }), UserController.me);
-
+router.route('/createpet')
+      .post(PetController.create);
 export default router;

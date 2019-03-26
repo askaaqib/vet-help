@@ -15,6 +15,7 @@ import Home from './components/Home';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CreateProfile from './components/CreateProfile';
+import PetsList from './components/PetsList';
 
 
   if(localStorage.jwtToken) {
@@ -29,11 +30,7 @@ import CreateProfile from './components/CreateProfile';
     }
   }
 
-
 class App extends Component {
-
-
-  
 
   render() {
     return (
@@ -43,6 +40,7 @@ class App extends Component {
             <Navbar />
             <Route exact path="/dashboard" component={ Home } />
             <Route exact path="/CreateProfile" component={ CreateProfile } />
+            <Route exact path="/pets" component={ PetsList } />
               <div className="container">
                 <Route exact path="/register" component={ Register } />
                 <Route exact path="/login" component={ Login } />
