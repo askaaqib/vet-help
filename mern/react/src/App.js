@@ -15,7 +15,12 @@ import Home from './components/Home';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CreateProfile from './components/CreateProfile';
+<<<<<<< HEAD
 import RequestHelp from './components/requestHelp';
+=======
+import PetsList from './components/PetsList';
+
+>>>>>>> 6717fd4fdda9b21de3f58e8a29c70650363b3b37
 
   if(localStorage.jwtToken) {
     setAuthToken(localStorage.jwtToken);
@@ -29,11 +34,7 @@ import RequestHelp from './components/requestHelp';
     }
   }
 
-
 class App extends Component {
-
-
-  
 
   render() {
     return (
@@ -43,7 +44,11 @@ class App extends Component {
             <Navbar />
             <Route exact path="/dashboard" component={ Home } />
             <Route exact path="/CreateProfile" component={ CreateProfile } />
+<<<<<<< HEAD
             <Route exact path="/requesthelp" component={ RequestHelp } />
+=======
+            <Route exact path="/pets" component={ PetsList } />
+>>>>>>> 6717fd4fdda9b21de3f58e8a29c70650363b3b37
               <div className="container">
                 <Route exact path="/register" component={ Register } />
                 <Route exact path="/login" component={ Login } />
