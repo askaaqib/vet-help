@@ -34,12 +34,12 @@ class CreateProfile extends Component {
 						errors: nextProps.errors
 				});
 		}
-}
+	}
 
 	handleInputChange(e) {
 		if (e.target.files) {
 			this.setState({
-				[e.target.name]: e.target.files
+				[e.target.name]: e.target.files[0]
 			})	
 		} else {
 			this.setState({
@@ -72,7 +72,7 @@ class CreateProfile extends Component {
 							<div className="container">
 								<div className="row">
 									<div className="col">
-										<form encType="multipart/form-data">
+										<form>
 											<div className="form-group col-md-6">
 												<label>Pet Name</label>
 												<input

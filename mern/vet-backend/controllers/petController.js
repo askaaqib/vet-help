@@ -31,3 +31,10 @@ export const create = async (req, res)  => {
 				res.json(Pet)
 			}); 
 }
+
+export const allPets = async (req, res) => {
+		Pet.find().then(Pet => {
+			res.json(Pet)
+		})
+		// return res.json({"something": 'seomthig'});
+}

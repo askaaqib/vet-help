@@ -12,6 +12,7 @@ import Users from './routes/user';
 import config from './models/vet.server.model';
 // define our app using express
 const app = express();
+const cors = require('cors');
 // express-busboy to parse multipart/form-data
 bb.extend(app);
 // allow-cors
@@ -20,6 +21,7 @@ app.use(function(req,res,next){
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 })
+app.use(cors());
 // configure app
 app.use(logger('dev'));
 
