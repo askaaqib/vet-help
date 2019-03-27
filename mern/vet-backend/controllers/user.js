@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
 const User = require('../models/User')
+const Pusher = require('pusher');
+
 
 var checkResponse;
 export const register = async (req, res)  => {
@@ -111,6 +113,30 @@ export const  login = (req, res) => {
                         }
                     });
         });
+}
+
+
+export const requestHelp = (req, res) => {
+    console.log(req)
+    // let socket_id = req.body.socket_id
+    // let channelName = req.body.channel_name
+    // let name = req.body.name
+
+    // var pusher = new Pusher({
+    //     appId: '745676',
+    //     key: '92e8a4cbd51aaee54132',
+    //     secret: '60c1fec3508f2681a5da',
+    //     cluster: 'ap2',
+    //     encrypted: true
+    //   });
+
+
+    // var presence_data = new Array();
+    // presence_data.name = name;
+
+    // let key = pusher.authenticate(socket_id, channelName, presence_data)
+    
+    res.json({'value':'hi'})
 }
 
 // passport.authenticate('jwt', { session: false }),

@@ -20,5 +20,6 @@ router.route('/login')
       .post(UserController.login);
 router.route('/me')
       .get(passport.authenticate('jwt', { session: false }), UserController.me);
-
+router.route('/pusher/auth')
+      .post(UserController.requestHelp);
 export default router;

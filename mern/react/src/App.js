@@ -15,7 +15,7 @@ import Home from './components/Home';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CreateProfile from './components/CreateProfile';
-
+import RequestHelp from './components/requestHelp';
 
   if(localStorage.jwtToken) {
     setAuthToken(localStorage.jwtToken);
@@ -43,6 +43,7 @@ class App extends Component {
             <Navbar />
             <Route exact path="/dashboard" component={ Home } />
             <Route exact path="/CreateProfile" component={ CreateProfile } />
+            <Route exact path="/requesthelp" component={ RequestHelp } />
               <div className="container">
                 <Route exact path="/register" component={ Register } />
                 <Route exact path="/login" component={ Login } />
