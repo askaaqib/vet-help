@@ -137,22 +137,70 @@ body {
 
 }
 
+
+.pets-list .list-row {
+  background: #d8d8d8;
+  margin-bottom: 10px;
+}  
 ul.pets-list {
   list-style: none;
 }
 .pets-list > li {
 }
-/* .pets-list .list-row {
-  background: gray;
-} */
 .pets-list .img-block {
   float: left;
+  padding-left: 0;
 }
-/* .pets-list .desc-block {
+.pets-list .desc-block {
   padding: 10px 10px;
-} */
+}
 .pets-list .img-block img {
-  height: 100px;
-  width: 100px;
+  height: 100%;
+  width: 100%;
   object-fit: cover;
+}
+.pets-list .actions-block {
+  padding: 10px 10px;
+}
+.pets-list .desc-block .pet-edit {
+  background: transparent;
+  color: #0083ff;
+  font-size: 20px;
+  margin: 4px;
+}
+.pets-list .desc-block div {
+  margin-bottom: 5px;
+}
+.petlist-head {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.btn-next {
+  display: block;
+  width: 100%;
+  border-radius: 0 !important;
+}
+.btn-back {
+  display: block;
+  width: 100%;
+  border-radius: 0 !important;
+}
+.btn-back .back-arrow {
+  float: left;
+}
+.pet-register .card-header {
+  border-color: #007bff;
+  margin: -1px;
+  border: none;
+  text-align: center;
+  background: #007bff;
+  color: white;
+}
+.pet-register .card-header button.back {
+    float: left;
+    background: transparet;
+    background: transparent;
+    color: white;
+    border: none;
 }

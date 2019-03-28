@@ -1,8 +1,9 @@
-import { SET_PETS_LIST } from '../actions/types';
+import { SET_PETS_LIST, SELECT_PET } from '../actions/types';
 // import isEmpty from '../is-empty';
 
 const initialState = {
-  petsList: {}
+  petsList: {},
+  selectedPet: null
 }
 
 export default function (state= initialState, action) {
@@ -11,6 +12,11 @@ export default function (state= initialState, action) {
       return {
           ...state,
           petsList: action.petsList
+      }
+    case SELECT_PET:
+      return {
+        ...state,
+        selectedPet: action.selectedPet
       }
     default:
       return state;
