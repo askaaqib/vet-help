@@ -56,6 +56,7 @@ class CreateProfile extends Component {
 		form.append("age", this.state.age);
 		form.append("type", this.state.type);
 		form.append("image", this.state.image);
+		form.append("user", this.props.auth.user.id);
 		this.props.createPetProfile(form, this.props.history);
 	}
 		
