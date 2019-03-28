@@ -19,6 +19,7 @@ router.route('/pusher/auth').post(UserController.requestHelp);
 router.route('/register').post(UserController.register);
 router.route('/login').post(UserController.login);
 router.route('/me').get(passport.authenticate('jwt', { session: false }), UserController.me);
-router.route('/createpet').post(PetController.create);
+router.route('/createpet').post(PetController.createPet);
 router.route('/pets').get(PetController.allPets);
+router.route('/registerpetchat').post(PetController.registerPetChat);
 export default router;

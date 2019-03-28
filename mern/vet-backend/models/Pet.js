@@ -19,7 +19,11 @@ const PetSchema = new Schema({
 	},
 	image: {
 		type: String
-	}
+	},
+	_user: {
+    type: Schema.Types.ObjectId,
+    ref: 'user'
+  }
 });
 
 const Pet = mongoose.model('pet', PetSchema );
