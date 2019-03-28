@@ -15,20 +15,10 @@ const router = express.Router();
 // router.route('/:id')
 //       .get(todoController.getTodo)
 //       .delete(todoController.deleteTodo);
-<<<<<<< HEAD
-router.route('/register')
-      .post(UserController.register);
-router.route('/login')
-      .post(UserController.login);
-router.route('/me')
-      .get(passport.authenticate('jwt', { session: false }), UserController.me);
-router.route('/pusher/auth')
-      .post(UserController.requestHelp);
-=======
+router.route('/pusher/auth').post(UserController.requestHelp);
 router.route('/register').post(UserController.register);
 router.route('/login').post(UserController.login);
 router.route('/me').get(passport.authenticate('jwt', { session: false }), UserController.me);
 router.route('/createpet').post(PetController.create);
 router.route('/pets').get(PetController.allPets);
->>>>>>> 6717fd4fdda9b21de3f58e8a29c70650363b3b37
 export default router;
