@@ -47,6 +47,7 @@ class Home extends Component {
 				)
 			}
 		}
+		const checkList = pets.petsList;
 		return (
 			<div className="main-dasboard">
 				<div className="container mt-5">
@@ -60,6 +61,15 @@ class Home extends Component {
 								<div className="row">
 									<PetsList petsList={ pets.petsList }/>
 								</div>
+								{checkList.length > 0 &&  checkList.map((value, index) => {
+									return (<div className="ml-0 pl-0 col-md-6 desc-block">
+									<span><b>Name: </b>{ value.name }</span>
+									<br/>
+									<span><b>Breed: </b> { value.breed }</span>
+									<br/>
+									<span><b>Age: </b> { value.age }</span>
+								</div>)
+								})}
 							</div>
 						</div>
 					</div>

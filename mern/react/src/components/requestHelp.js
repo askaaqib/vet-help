@@ -15,11 +15,11 @@ class RequestHelp extends Component {
             otherUserid: null
           }
         this.mediaHandler = new MediaHandler();
-
-        this.user = {id:'1', name: 'hassaan'}
-
+        this.user = this.props.auth.user
+        this.username = this.props.auth.user.name
+        console.log(this.props.auth)
         this.setupPusher();
-
+        this.peers = {}
         this.callTo = this.callTo.bind(this);
         this.setupPusher = this.setupPusher.bind(this);
         this.startPeer = this.startPeer.bind(this);
@@ -44,20 +44,27 @@ class RequestHelp extends Component {
         if(!this.props.auth.isAuthenticated) {
             this.props.history.push('/login');
         }
+//         this.user = this.props.auth.user
+// console.log(this.props.auth.user.id, this.user)
     }
 
     setupPusher() {
+        // Pusher.logToConsole = true;
         this.pusher = new Pusher(APP_KEY, {
             authEndpoint: '/api/pusher/auth',
             cluster: 'ap2',
             auth: {
-                params: this.user.id,
+                params: {user_id: this.user.id, user_name : this.username},
+                headers: {
+                    "content-type": "application/x-www-form-urlencoded",
+                  }
             }
         });
 
         this.channel = this.pusher.subscribe('presence-video-channel');
 
         this.channel.bind(`client-signal-${this.user.id}`, (signal) => {
+            console.log(this.peers)
             let peer = this.peers[signal.userId];
 
             // if peer is not already exists, we got an incoming call
@@ -71,13 +78,16 @@ class RequestHelp extends Component {
     }
 
     startPeer(userId, initiator = true) {
+        
         const peer = new Peer({
             initiator,
             stream: this.user.stream,
             trickle: false
         });
 
+        
         peer.on('signal', (data) => {
+
             this.channel.trigger(`client-signal-${userId}`, {
                 type: 'signal',
                 userId: this.user.id,
@@ -86,12 +96,14 @@ class RequestHelp extends Component {
         });
 
         peer.on('stream', (stream) => {
+            console.log(stream,' coming in')
             try {
                 this.userVideo.srcObject = stream;
             } catch (e) {
                 this.userVideo.src = URL.createObjectURL(stream);
             }
 
+            console.log(this.userVideo, 'hiiiiiiiiiiii')
             this.userVideo.play();
         });
 
@@ -103,7 +115,7 @@ class RequestHelp extends Component {
 
             this.peers[userId] = undefined;
         });
-
+       
         return peer;
     }
 
@@ -112,13 +124,16 @@ class RequestHelp extends Component {
     }
 
     render() { 
-        {[1,2,3,4].map((userId) => {
-            return this.user.id !== userId ? <button key={userId} onClick={() => this.callTo(userId)}>Call {userId}</button> : null;
-        })}
+       console.log(parseInt(this.user.id))
 
         return ( 
             <div className="main-dasboard">
               <div className="container mt-5">
+                <div className="requests">
+                {["5c9c9260fec4e60e9276c6e3"].map((userId) => {
+                 return   this.user.id !== userId ? <button key={userId} onClick={() => this.callTo(userId)}>Call {userId}</button> : null;
+                })}
+                </div>
                 <div className="card dash-main-card">
                     <div className="video-container">
                         <video className="my-video" ref={(ref) => {this.myVideo = ref;}}></video>              
