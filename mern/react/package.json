@@ -9,6 +9,7 @@
     "attachmediastream": "^2.1.0",
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
+    "busboy": "^0.3.0",
     "classname": "0.0.0",
     "classnames": "^2.2.6",
     "jwt-decode": "^2.2.0",
@@ -23,7 +24,8 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "simple-peer": "^9.3.0",
-    "skylinkjs": "^0.6.37"
+    "skylinkjs": "^0.6.37",
+    "sweetalert2": "^8.7.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -40,7 +42,7 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-   "proxy": "http://localhost:3001",
+  "proxy": "http://localhost:3001",
   "devDependencies": {
     "gravatar": "^1.8.0"
   }

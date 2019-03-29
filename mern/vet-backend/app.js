@@ -13,7 +13,11 @@ import config from './models/vet.server.model';
 // define our app using express
 const app = express();
 // express-busboy to parse multipart/form-data
-bb.extend(app);
+bb.extend(app, {
+  upload: true,
+  // path: './uploads123/files'
+  }
+);
 // allow-cors
 app.use(function(req,res,next){
   res.header("Access-Control-Allow-Origin", "*");
