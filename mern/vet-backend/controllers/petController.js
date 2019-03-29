@@ -33,7 +33,6 @@ export const createPet = async (req, res)  => {
 		var newpath = '../react/public/images/pets/' + filename
 	}
 	
-<<<<<<< HEAD
 	const newPet = new Pet({
 		name: req.body.name,
 		type: req.body.type,
@@ -65,23 +64,6 @@ export const deletePet = async (req, res) => {
 		}
 		res.json(pet)
 	})
-=======
-		const newPet = new Pet({
-			name: req.body.name,
-			type: req.body.type,
-			age: req.body.age,
-			breed: req.body.breed,
-			_user: req.body.user,
-			image: req.file,
-		});
-		console.log(req)
-
-		res.json({'image' : req.files})
-		// newPet.save()
-		// 	.then(Pet => {
-		// 		res.json(Pet)
-		// 	}); 
->>>>>>> d27464300f6ccb39b63ad6ea21115faedb69571c
 }
 
 /******************* SHOW ALL PETS METHOD *******************/

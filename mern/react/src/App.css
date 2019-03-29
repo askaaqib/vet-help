@@ -203,16 +203,6 @@ ul.pets-list {
     color: white;
     border: none;
 }
-<<<<<<< HEAD
-.pets-list .pet-icons {
-  font-size: 17px;
-}
-.pets-list .pet-delete {
-  color: red;
-  margin-left: 20px;
-  background: none;
-  border: none;
-=======
 
 
 /* Side bar */
@@ -286,5 +276,4 @@ ul.pets-list {
   font-size: 28px;
   /* font-weight: bold; */
   color: #dc3b3b;
->>>>>>> d27464300f6ccb39b63ad6ea21115faedb69571c
 }
