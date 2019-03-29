@@ -16,6 +16,7 @@ class Register extends Component {
             email: '',
             password: '',
             password_confirm: '',
+            role : '',
             errors: {}
         }
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -35,6 +36,7 @@ class Register extends Component {
         form.append("email", this.state.email);
         form.append("password", this.state.password);
         form.append("password_confirm", this.state.password_confirm);
+        form.append("role", "3453");
         // const user = {
         //     name: this.state.name,
         //     email: this.state.email,
@@ -65,7 +67,7 @@ class Register extends Component {
         const { errors } = this.state;
         return(
         <div className="container" style={{ marginTop: '50px', width: '700px'}}>
-            <h2 style={{marginBottom: '40px'}}>Registration</h2>
+            <h2 className="login-h2" style={{marginBottom: '40px'}}>Registration</h2>
             <form onSubmit={ this.handleSubmit }>
                 <div className="form-group">
                     <input
@@ -120,7 +122,7 @@ class Register extends Component {
                     {errors.password_confirm && (<div className="invalid-feedback">{errors.password_confirm}</div>)}
                 </div>
                 <div className="form-group">
-                    <button type="submit" className="btn btn-primary">
+                    <button type="submit" className="btn btn-primary login-btn-primary">
                         Register User
                     </button>
                 </div>

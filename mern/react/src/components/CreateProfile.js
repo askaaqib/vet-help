@@ -46,6 +46,7 @@ class CreateProfile extends Component {
 				[e.target.name]: e.target.value
 			})	
 		}
+		// console.log(this.state, e.target.name, e.target.files)
 	}
 
 	addProfile(e) {
@@ -57,6 +58,7 @@ class CreateProfile extends Component {
 		form.append("type", this.state.type);
 		form.append("image", this.state.image);
 		form.append("user", this.props.auth.user.id);
+		// console.log(this.state, this.state.image)
 		this.props.createPetProfile(form, this.props.history);
 	}
 		

@@ -29,7 +29,7 @@ class Login extends Component {
         e.preventDefault();
         var form = new FormData();
         form.append("email", this.state.email);
-        form.append("password", this.state.password)
+        form.append("password", this.state.password);
         this.props.loginUser(form);
     }
 
@@ -54,7 +54,7 @@ class Login extends Component {
         const {errors} = this.state;
         return(
         <div className="container" style={{ marginTop: '50px', width: '700px'}}>
-            <h2 style={{marginBottom: '40px'}}>Login</h2>
+            <h2 className="login-h2" style={{marginBottom: '40px'}}>Login</h2>
             <form onSubmit={ this.handleSubmit }>
                 <div className="form-group">
                     <input
@@ -83,7 +83,7 @@ class Login extends Component {
                     {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
                 </div>
                 <div className="form-group">
-                    <button type="submit" className="btn btn-primary">
+                    <button type="submit" className="btn btn-primary login-btn-primary">
                         Login User
                     </button>
                 </div>

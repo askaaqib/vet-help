@@ -104,6 +104,18 @@ class PetsList extends Component {
 										petsList={ pets.petsList }
 									/>
 								</div>
+<<<<<<< HEAD
+=======
+								{/* {checkList.length > 0 &&  checkList.map((value, index) => {
+									return (<div className="ml-0 pl-0 col-md-6 desc-block">
+									<span><b>Name: </b>{ value.name }</span>
+									<br/>
+									<span><b>Breed: </b> { value.breed }</span>
+									<br/>
+									<span><b>Age: </b> { value.age }</span>
+								</div>)
+								})} */}
+>>>>>>> d27464300f6ccb39b63ad6ea21115faedb69571c
 							</div>
 						</div>
 					</div>

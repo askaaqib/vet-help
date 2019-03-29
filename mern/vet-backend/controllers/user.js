@@ -19,7 +19,7 @@ export const register = async (req, res)  => {
     }
 
     const {errors, isValid} = checkResponse
-    
+    var role = null;
 
     if(!isValid) {
         console.log('coming')
@@ -40,10 +40,16 @@ export const register = async (req, res)  => {
                 r: 'pg',
                 d: 'mm'
             });
+            if(req.body.roles == 'admin'){
+                role = 'admin';
+            }else{
+                role = 'user';
+            }
             const newUser = new User({
                 name: req.body.name,
                 email: req.body.email,
                 password: req.body.password,
+                role: role,
                 avatar
             });
             
@@ -93,6 +99,7 @@ export const  login = (req, res) => {
                             const payload = {
                                 id: user.id,
                                 name: user.name,
+                                role: user.role,
                                 avatar: user.avatar
                             }
                             jwt.sign(payload, 'secret', {
@@ -118,7 +125,7 @@ export const  login = (req, res) => {
 export const requestHelp = (req, res) => {
     let socket_id = req.body.socket_id
     let channelName = req.body.channel_name
-    let name = req.body.user_name
+    // let name = req.body.user_name
     let user_id = req.body.user_id
 
     var pusher = new Pusher({
@@ -130,7 +137,7 @@ export const requestHelp = (req, res) => {
       });
 
 
-    var presence_data = {user_id: user_id, user_name: name}
+    var presence_data = {user_id: user_id}
 
     let key = pusher.authenticate(socket_id, channelName, presence_data)
     

@@ -6,6 +6,7 @@ import { GET_ERRORS, SET_PETS_LIST, SELECT_PET } from './types';
 
 /********* CREEATE PET PROFILE *********/
 export const createPetProfile = (pet, history) => dispatch => {
+<<<<<<< HEAD
 	axios.post('/api/createpet', pet).then(res => {
 		history.push('/pets')
 	})
@@ -24,6 +25,30 @@ export const deleteSelectedPet = (pet, history) => dispatch => {
 }
 
 /********* PET REGISTER FOR SELECTED PET *********/
+=======
+const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+
+// Display the key/value pairs
+for (var pair of pet.entries()) {
+	console.log(pair[0]+ ', ' + pair[1]); 
+}
+
+fetch('/api/createpet', {
+	mode: 'no-cors',
+	method: "POST",
+	body: pet
+}).then(res => {}
+			// history.push('/pets')
+			
+			)
+		.catch(err => {
+			dispatch({
+				type: GET_ERRORS,
+				payload: err
+			});
+		});
+	}
+>>>>>>> d27464300f6ccb39b63ad6ea21115faedb69571c
 export const registerPetChat = (pet, history) => dispatch => {
 	axios.post('/api/registerpetchat', pet).then(res => history.push('/pets'))
 		.catch(err => {

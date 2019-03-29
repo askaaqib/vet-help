@@ -17,8 +17,11 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "busboy": "^0.3.0",
+<<<<<<< HEAD
     "busboy-body-parser": "^0.3.2",
     "cors": "^2.8.5",
+=======
+>>>>>>> d27464300f6ccb39b63ad6ea21115faedb69571c
     "express": "^4.16.4",
     "express-busboy": "^7.0.1",
     "formidable": "^1.2.1",
@@ -42,6 +45,7 @@
     "validator": "^10.11.0"
   },
   "devDependencies": {
+    "cors": "^2.8.5",
     "nodemon": "^1.18.10"
   }
 }
