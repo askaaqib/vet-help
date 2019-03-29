@@ -32,9 +32,9 @@
 
 body {
   font-family: roboto-light !important;
-  background-image: url(./img/store.jpg);
+  /* background-image: url(./img/store.jpg);
 
-  background-size: cover;
+  background-size: cover; */
 }
 
 
@@ -203,4 +203,78 @@ ul.pets-list {
     background: transparent;
     color: white;
     border: none;
+}
+
+
+/* Side bar */
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  /* margin-left: -15rem; */
+  /* -webkit-transition: margin .25s ease-out; */
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  /* transition: margin .25s ease-out; */
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+}
+
+.login-conatiner {
+  background: #e8c6c614;
+  padding: 10px;
+  margin-top: 200px;
+  border: 2px dashed #eae1e1;
+  box-shadow: 1px 1px 15px 1px #eee;
+}
+
+.login-btn-primary {
+  color: #fff !important;
+  background-color: #dc3b3b !important;
+  border-color: #dc3b3b !important;
+  font-family: roboto-regular;
+}
+
+.nav-item a {
+  color: #fff;
+  font-weight:bold;
+  font-family: roboto;
+}
+
+.login-h2 {
+  margin-bottom: 40px;
+  font-family: roboto-regular;
+  text-align: center;
+  font-size: 28px;
+  /* font-weight: bold; */
+  color: #dc3b3b;
 }

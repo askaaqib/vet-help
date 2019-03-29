@@ -2,12 +2,17 @@ const validateProfileInput = require('../validation/createpet');
 const validateChatRegisterInput = require('../validation/registerpetchat');
 const Pet = require('../models/Pet')
 const Chat = require('../models/Chat')
+const Busboy = require('busboy')
 // var multer  = require('multer')
 // var upload = multer({ dest: 'uploads' })
 
 var checkResponse;
 export const createPet = async (req, res)  => {
+	// console.log(req.body, req.files)
 	// upload.single(image)
+
+	// console.log(req)
+
 	try{
 		checkResponse = await validateProfileInput(req.body);
 	}catch(error){
@@ -26,12 +31,16 @@ export const createPet = async (req, res)  => {
 			type: req.body.type,
 			age: req.body.age,
 			breed: req.body.breed,
-			_user: req.body.user
+			_user: req.body.user,
+			image: req.file,
 		});
-		newPet.save()
-			.then(Pet => {
-				res.json(Pet)
-			}); 
+		console.log(req)
+
+		res.json({'image' : req.files})
+		// newPet.save()
+		// 	.then(Pet => {
+		// 		res.json(Pet)
+		// 	}); 
 }
 
 export const allPets = async (req, res) => {

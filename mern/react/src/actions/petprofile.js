@@ -5,14 +5,28 @@ import { GET_ERRORS, SET_PETS_LIST, SELECT_PET } from './types';
 // var upload = multer({ dest: 'public/uploads' })
 
 export const createPetProfile = (pet, history) => dispatch => {
-	axios.post('/api/createpet', pet).then(res => history.push('/pets'))
-	.catch(err => {
-		dispatch({
-			type: GET_ERRORS,
-			payload: err
-		});
-	});
+const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+
+// Display the key/value pairs
+for (var pair of pet.entries()) {
+	console.log(pair[0]+ ', ' + pair[1]); 
 }
+
+fetch('/api/createpet', {
+	mode: 'no-cors',
+	method: "POST",
+	body: pet
+}).then(res => {}
+			// history.push('/pets')
+			
+			)
+		.catch(err => {
+			dispatch({
+				type: GET_ERRORS,
+				payload: err
+			});
+		});
+	}
 export const registerPetChat = (pet, history) => dispatch => {
 	axios.post('/api/registerpetchat', pet).then(res => history.push('/pets'))
 		.catch(err => {

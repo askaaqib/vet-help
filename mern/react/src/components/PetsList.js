@@ -78,7 +78,7 @@ class PetsList extends Component {
 								<div className="row">
 									<PetsList onClick={ this.ChatVet.bind(this) } petsList={ pets.petsList }/>
 								</div>
-								{checkList.length > 0 &&  checkList.map((value, index) => {
+								{/* {checkList.length > 0 &&  checkList.map((value, index) => {
 									return (<div className="ml-0 pl-0 col-md-6 desc-block">
 									<span><b>Name: </b>{ value.name }</span>
 									<br/>
@@ -86,7 +86,7 @@ class PetsList extends Component {
 									<br/>
 									<span><b>Age: </b> { value.age }</span>
 								</div>)
-								})}
+								})} */}
 							</div>
 						</div>
 					</div>
