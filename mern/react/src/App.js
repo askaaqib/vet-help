@@ -44,7 +44,7 @@ class App extends Component {
             <Route exact path="/requesthelp" component={ RequestHelp } />
             <Route exact path="/pets" component={ PetsList } />
             <Route exact path="/petregister" component= { PetRegister} />
-              <div className="login-conatiner container">
+              <div className="container">
                 <Route exact path="/register" component={ Register } />
                 <Route exact path="/login" component={ Login } />
               </div>
