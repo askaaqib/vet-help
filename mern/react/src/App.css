@@ -183,6 +183,15 @@ ul.pets-list {
   color: #0083ff;
   margin: 4px;
 }
+.pets-list .pet-icons {
+  font-size: 17px;
+  background: transparent;
+  border: none;
+}
+.pets-list .pet-delete {
+  color: red;
+  margin-left: 17px;
+}
 .pets-list .desc-block div {
   margin-bottom: 5px;
 }
@@ -293,4 +302,13 @@ ul.pets-list {
   font-size: 28px;
   /* font-weight: bold; */
   color: #E91E63;
+}
+.pet-edit .pet-img {
+  height: 300px;
+  width: 300px;
+}
+.pet-edit .pet-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
