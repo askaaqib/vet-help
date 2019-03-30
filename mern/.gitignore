@@ -1,2 +1,6 @@
+./vet-backend/node_modules
 /vet-backend/node_modules
 /react/node_modules
+./react/node_modules
+/vet-backend/package-lock.json
+./vet-backend/package-lock.json
