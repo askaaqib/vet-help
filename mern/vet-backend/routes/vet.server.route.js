@@ -23,5 +23,5 @@ router.route('/createpet').post(PetController.createPet);
 router.route('/pets').get(PetController.allPets);
 router.route('/registerpetchat').post(PetController.registerPetChat);
 router.route('/deletepet').post(PetController.deletePet);
-router.route('/pet:id').get(PetController.editPet)
+// router.route('/pet:id').get(PetController.editPet)
 export default router;
