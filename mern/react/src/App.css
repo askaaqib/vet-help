@@ -32,12 +32,28 @@
 
 body {
   font-family: roboto-light !important;
-  /* background-image: url(./img/store.jpg);
+  background-image: url(./img/doole.jpg);
+  background-image:  linear-gradient( rgba(255, 252, 252, 0.82),  rgba(255, 252, 252, 0.82)),  url(./img/doole.jpg);
 
-  background-size: cover; */
 }
 
-
+::-webkit-input-placeholder {
+  color: peachpuff;
+  font-size: 18px;
+}
+::-moz-placeholder {
+  color: peachpuff;
+  font-size: 18px;
+}
+:-ms-input-placeholder {
+  color: peachpuff;
+  font-size: 18px;
+}
+::placeholder {
+  color: peachpuff;
+  font-size: 18px;
+  font-family: roboto-thin;
+}
 
 .App {
   text-align: center;
@@ -80,14 +96,14 @@ body {
 }
 
 .header-bg {
-  background-color : #d6121bd9!important;
+  background-color : #E91E63 !important;
   box-shadow : 0px 1px 5px 1px #777475;
 }
 
 .btn_dashboard{
-  color: #f10505 !important;
+  color: #E91E63 !important;
   background-color: #ffffff !important;
-  border-color: #ff0047 !important;
+  border-color: #E91E63 !important;
   display:block !important;
 }
 
@@ -228,6 +244,7 @@ ul.pets-list {
 
 #page-content-wrapper {
   min-width: 100vw;
+  background: #ffffffc7;
 }
 
 #wrapper.toggled #sidebar-wrapper {
@@ -250,17 +267,17 @@ ul.pets-list {
 }
 
 .login-conatiner {
-  background: #e8c6c614;
+  background: #fdfdfdb8;
   padding: 10px;
-  margin-top: 200px;
+  margin-top: 100px;
   border: 2px dashed #eae1e1;
   box-shadow: 1px 1px 15px 1px #eee;
 }
 
 .login-btn-primary {
   color: #fff !important;
-  background-color: #dc3b3b !important;
-  border-color: #dc3b3b !important;
+  background-color:#E91E63 !important;
+  border-color: #E91E63 !important;
   font-family: roboto-regular;
 }
 
@@ -272,9 +289,9 @@ ul.pets-list {
 
 .login-h2 {
   margin-bottom: 40px;
-  font-family: roboto-regular;
+  font-family: roboto-thin;
   text-align: center;
   font-size: 28px;
   /* font-weight: bold; */
-  color: #dc3b3b;
+  color: #E91E63;
 }
