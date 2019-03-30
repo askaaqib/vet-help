@@ -75,7 +75,7 @@ class CreateProfile extends Component {
 							<div className="container">
 								<div className="row">
 									<div className="col">
-										<form>
+										<form encType="multipart/form-data">
 											<div className="form-group col-md-6">
 												<label>Pet Name</label>
 												<input
@@ -101,7 +101,7 @@ class CreateProfile extends Component {
 														<option value="0">Pet Type</option>
 														<option value="dog">Dog</option>
 													</select>
-													{ errors.name && (<div className="invalid-feedback">{errors.type}</div>) }
+													{ errors.type && (<div className="invalid-feedback">{errors.type}</div>) }
 											</div>
 											<div className="form-group col-md-6">
 												<label>Pet Breed</label>
@@ -114,7 +114,7 @@ class CreateProfile extends Component {
 													defaultValue={ this.state.breed }
 													onChange={ this.handleInputChange }
 												/>
-												{ errors.name && (<div className="invalid-feedback">{errors.breed}</div>) }
+												{ errors.breed && (<div className="invalid-feedback">{errors.breed}</div>) }
 											</div>
 											<div className="form-group col-md-6">
 												<label>Age</label>
@@ -127,12 +127,13 @@ class CreateProfile extends Component {
 													onChange={ this.handleInputChange }
 													className={ classnames('form-control', {'is-invalid': errors.age})}
 													/>
-													{ errors.name && (<div className="invalid-feedback">{errors.age}</div>) }
+													{ errors.age && (<div className="invalid-feedback">{errors.age}</div>) }
 											</div>
 											<div className="form-group col-md-6">
 												<input
 													type="file"
 													name="image"
+													id="image"
 													onChange={ this.handleInputChange } 
 												/>
 											</div>
