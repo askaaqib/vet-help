@@ -63,13 +63,17 @@ class PetsList extends Component {
 					<div key={index}>
 						<div className="row list-row">
 							<div className="col-md-2 img-block">
-								<img src={'/images/pets/' + pet.image} alt={ pet.name + ' Image'}></img>
+								{ pet.image ? (
+									<img src={'/images/pets/' + pet.image} alt={ pet.name + ' Image'}></img>
+								) : (
+									<img src={'/no-img.png'} alt={ pet.name + ' Image'}></img>
+								)}
 							</div>
 							<div className="col-md-7 desc-block">
 								<div className="pet-name"><b>Name: </b>{ pet.name }</div>
 								<div className="pet-breed"><b>Breed: </b> { pet.breed }</div>
 								<div className="pet-age"><b>Age: </b> { pet.age }</div>
-								<Link to={'/pet/' + pet._id} className="pet-icons pet-edit"><FontAwesomeIcon icon={ faPen } /></Link>
+								<Link to={'/pet/' + pet._id + '/edit'} className="pet-icons pet-edit"><FontAwesomeIcon icon={ faPen } /></Link>
 								<button onClick={ () => props.onDelete(pet) } className="pet-icons pet-delete"><FontAwesomeIcon icon={ faTrash } /></button>
 							</div>
 							<div className="col-md-3 actions-block text-right">

@@ -19,10 +19,20 @@ router.route('/pusher/auth').post(UserController.requestHelp);
 router.route('/register').post(UserController.register);
 router.route('/login').post(UserController.login);
 router.route('/me').get(passport.authenticate('jwt', { session: false }), UserController.me);
+
+/************* PET ROUTES *************/
 router.route('/createpet').post(PetController.createPet);
 router.route('/pets').get(PetController.allPets);
 router.route('/registerpetchat').post(PetController.registerPetChat);
 router.route('/deletepet').post(PetController.deletePet);
+<<<<<<< HEAD
 // router.route('/pet:id').get(PetController.editPet)
 router.route('/getAllusers').get(UserController.getAllUsers);
+||||||| merged common ancestors
+// router.route('/pet:id').get(PetController.editPet)
+=======
+router.route('/petshow').get(PetController.petById)
+router.route('/updatepet').post(PetController.updatePet);
+/************* PET ROUTES *************/
+>>>>>>> c77972e3bbd183d131616e1d7490b20298f14dbe
 export default router;
