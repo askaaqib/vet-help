@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import UserHome from './UserHome';
-import AdminHome from './AdminHome';
+import AdminHome from './admin/AdminHome';
 
 class Home extends Component {
     
