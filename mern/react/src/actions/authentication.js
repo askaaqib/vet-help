@@ -48,18 +48,8 @@ export const logoutUser = (history) => dispatch => {
     localStorage.removeItem('jwtToken')
     setAuthToken(false)
     dispatch(setCurrentUser({}))
-<<<<<<< HEAD
+
     if(history){
         history.push('/login')
     }
-    
-||||||| merged common ancestors
-    history.push('/login')
-=======
-    if (history) {
-        history.push('/login')
-    } else {
-        window.location('/login')
-    }
->>>>>>> c77972e3bbd183d131616e1d7490b20298f14dbe
 }
