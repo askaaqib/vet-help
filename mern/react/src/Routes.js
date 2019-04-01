@@ -19,6 +19,7 @@ import RequestHelp from './components/requestHelp';
 import PetsList from './components/PetsList';
 import PetRegister from './components/PetRegister';
 import UserLIst from './components/admin/users/UsersList';
+import EditPet from './components/EditPet';
 
   if(localStorage.jwtToken) {
     setAuthToken(localStorage.jwtToken);
@@ -46,6 +47,7 @@ class Routes extends Component {
             <Route exact path="/requesthelp" component={ RequestHelp } />
             <Route exact path="/pets" component={ PetsList } />
             <Route exact path="/petregister" component= { PetRegister} />
+            <Route path="/pet/:id/edit" component={ EditPet } />
               <div className="container">
                 <Route exact path="/register" component={ Register } />
                 <Route exact path="/login" component={ Login } />

@@ -130,12 +130,14 @@ export const allPets = async (req, res) => {
 /******************* REGISTER PET FOR CHAT WITH VET METHOD *******************/
 export const registerPetChat = async (req, res)  => {
 	// upload.single(image)
+	console.log(req.files)
+	return false
 	try{
 		checkResponse = await validateChatRegisterInput(req.body);
 	}catch(error){
 		res.json({"error": error})
 	}
-
+	
 	const {errors, isValid} = checkResponse
     
 	if(!isValid) {

@@ -312,3 +312,10 @@ ul.pets-list {
   height: 100%;
   object-fit: cover;
 }
+.uploaded-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  float: left;
+  margin-right: 20px;
+}
