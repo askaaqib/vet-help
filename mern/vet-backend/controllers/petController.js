@@ -129,9 +129,6 @@ export const allPets = async (req, res) => {
 
 /******************* REGISTER PET FOR CHAT WITH VET METHOD *******************/
 export const registerPetChat = async (req, res)  => {
-	// upload.single(image)
-	console.log(req.files)
-	return false
 	try{
 		checkResponse = await validateChatRegisterInput(req.body);
 	}catch(error){
@@ -139,19 +136,53 @@ export const registerPetChat = async (req, res)  => {
 	}
 	
 	const {errors, isValid} = checkResponse
-    
 	if(!isValid) {
 		return res.status(400).json(errors);
 	}
-		const newChat = new Chat({
-			problem: req.body.problem,
-			problem_duration: req.body.problem_duration,
-			eating: req.body.eating,
-			weight: req.body.weight,
-			_pet: req.body.pet
+	// upload.single(image)
+
+	if (req.body.images) {
+		var Images = JSON.parse(req.body.images)
+		Images.map((image, index) => {
+			var filename = Date.now() + '-' + image.path
+			var newpath = '../react/public/images/chats/' + filename
+			var img = image.buffer
+			var data = img.replace(/^data:image\/\w+;base64,/, "");
+			var buf = Buffer.from(data, 'base64');
+			fs.writeFile(newpath, buf, 'base64', function (err) {});
+			image.name = filename
+			delete(image.path);
+			delete(image.preview);
+			delete(image.buffer);
+		})
+	}	
+
+	req.body.images = Images	
+	
+	var videoname = ''
+	if (req.files.videos) {
+		var oldpath = req.files.videos.file
+		videoname = Date.now() + '-' + req.files.videos.filename
+		var newpath = '../react/public/images/chats/' + videoname
+		fs.createReadStream(oldpath);
+		var readerStream = fs.createReadStream(oldpath);
+		var writerStream = fs.createWriteStream(newpath);
+		readerStream.pipe(writerStream);
+	}	
+
+	const newChat = new Chat({
+		problem: req.body.problem,
+		problem_duration: req.body.problem_duration,
+		eating: req.body.eating,
+		weight: req.body.weight,
+		images: req.body.images,
+		videos: videoname,
+		_pet: req.body.pet
+	});
+
+	newChat.save()
+		.then(Chat => {
+			res.json(Chat)
 		});
-		newChat.save()
-			.then(Chat => {
-				res.json(Chat)
-			}); 
+
 }

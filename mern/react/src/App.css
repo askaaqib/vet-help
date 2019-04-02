@@ -319,3 +319,45 @@ ul.pets-list {
   float: left;
   margin-right: 20px;
 }
+.uploaded-media .btn-img-del {
+  position: absolute;
+  right: -8px;
+  border: 1px solid black;
+  background: #b50000;
+  color: white;
+  border-radius: 1px;
+  top: -10px;
+}
+.uploaded-videos .btn-img-del {
+  top: 1px;
+}
+.images-dropzone .dropzone{
+  color: #e91e63;
+  padding: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+}
+.images-dropzone .dropzone .img-icon {
+  font-size: 25px;
+}
+.images-dropzone {
+  padding: 25px 1px;
+  margin-top: 20px;
+  background: #ececec;
+}
+.videos-dropzone .dropzone{
+  color: #e91e63;
+  padding: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+}
+.videos-dropzone .dropzone .img-icon {
+  font-size: 25px;
+}
+.videos-dropzone {
+  padding: 25px 1px;
+  margin-top: 20px;
+  background: #ececec;
+}

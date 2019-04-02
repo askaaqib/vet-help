@@ -40,7 +40,7 @@ export const deleteSelectedPet = (pet, history) => dispatch => {
 /********* PET REGISTER FOR SELECTED PET *********/
 export const registerPetChat = (pet, history) => dispatch => {
 	axios.post('/api/registerpetchat', pet).then(res => {
-			// history.push('/pets')
+			history.push('/pets')
 		})
 		.catch(err => {
 			dispatch({

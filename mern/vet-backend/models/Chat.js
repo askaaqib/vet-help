@@ -13,7 +13,13 @@ const ChatSchema = new Schema({
 	},
 	weight: {
 		type: String
-  },
+	},
+	images: {
+		type: Array
+	},
+	videos: {
+		type: Array
+	},
   _pet: {
     type: Schema.Types.ObjectId,
     ref: 'pet'
