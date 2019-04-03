@@ -1,7 +1,7 @@
 // authentication.js
 import axios from 'axios';
-import { GET_ERRORS, SET_PETS_LIST, SELECT_PET, PET_EDIT_SHOW } from './types';
-// var multer  = require('multer')
+import { GET_ERRORS, SET_PETS_LIST, SELECT_PET, PET_EDIT_SHOW, REQUEST_HELP_PENDING } from './types';
+// var multer  = require('multer')REQUEST_HELP_PENDING
 // var upload = multer({ dest: 'public/uploads' })
 
 /********* CREATE PET PROFILE *********/
@@ -40,7 +40,8 @@ export const deleteSelectedPet = (pet, history) => dispatch => {
 /********* PET REGISTER FOR SELECTED PET *********/
 export const registerPetChat = (pet, history) => dispatch => {
 	axios.post('/api/registerpetchat', pet).then(res => {
-			history.push('/pets')
+			history.push('/requesthelp')
+			dispatch({type: REQUEST_HELP_PENDING})
 		})
 		.catch(err => {
 			dispatch({

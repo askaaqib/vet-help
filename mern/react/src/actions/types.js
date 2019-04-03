@@ -7,3 +7,5 @@ export const SELECT_PET = 'SELECT_PET';
 export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const TOTAL_PAGES = 'TOTAL_PAGES';
 export const PET_EDIT_SHOW = 'PET_EDIT_SHOW'
+export const REQUEST_HELP_PENDING = 'REQUEST_HELP_PENDING'
+export const GET_ALL_REQUESTS = 'GET_ALL_REQUESTS'

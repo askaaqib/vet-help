@@ -5,10 +5,12 @@ import errorReducer from './errorReducer';
 import authReducer from './authReducer';
 import petsReducer from './petsReducer';
 import usersReducer from './admin/usersReducer';
+import requestsReducer from './admin/requestsReducer';
 
 export default combineReducers({
     errors: errorReducer,
     auth: authReducer,
     pets: petsReducer,
-    users: usersReducer
+    users: usersReducer,
+    requests: requestsReducer
 });

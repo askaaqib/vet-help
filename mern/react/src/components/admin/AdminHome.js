@@ -14,7 +14,9 @@ class  AdminHome extends Component {
 
   componentDidMount() {
     if(!this.props.auth.isAuthenticated && this.props.auth.roles !== 'admin') {
-			this.props.history.push('/login');
+      if (this.props.history) {
+        this.props.history.push('/login');
+      }
     }
 
     $("#menu-toggle").click(function(e) {

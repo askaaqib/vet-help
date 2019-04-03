@@ -19,6 +19,7 @@ import RequestHelp from './components/requestHelp';
 import PetsList from './components/PetsList';
 import PetRegister from './components/PetRegister';
 import UserLIst from './components/admin/users/UsersList';
+import RequestLIst from './components/admin/requests/RequestsList';
 import EditPet from './components/EditPet';
 
   if(localStorage.jwtToken) {
@@ -42,6 +43,7 @@ class Routes extends Component {
           <div>
             <Navbar />
             <Route exact path="/dashboard" component={ Home } />
+            <Route exact path="/requestlist" component={ RequestLIst } />
             <Route exact path="/userlist" component={ UserLIst } />
             <Route exact path="/CreateProfile" component={ CreateProfile } />
             <Route exact path="/requesthelp" component={ RequestHelp } />

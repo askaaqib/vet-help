@@ -79,7 +79,7 @@ class PetRegister extends Component {
           buffer: binaryStr
         })
       }
-      reader.readAsArrayBuffer(file)
+      // reader.readAsArrayBuffer(file)
     })
 
     var prevFile = this.state.images

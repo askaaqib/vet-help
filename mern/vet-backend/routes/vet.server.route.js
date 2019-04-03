@@ -4,6 +4,7 @@ import express from 'express';
 import passport from 'passport';
 // import * as todoController from '../controllers/vet.server.controller';
 import * as UserController from '../controllers/user';
+import * as RequestController from '../controllers/requestController';
 import * as PetController from '../controllers/petController';
 // get an instance of express router
 
@@ -27,7 +28,11 @@ router.route('/registerpetchat').post(PetController.registerPetChat);
 router.route('/deletepet').post(PetController.deletePet);
 
 // router.route('/pet:id').get(PetController.editPet)
+/*********** ADMIN ROUTES ***********/
 router.route('/getAllusers').get(UserController.getAllUsers);
+router.route('/getAllrequests').get(RequestController.getAllRequests);
+/*********** ADMIN ROUTES ***********/
+
 router.route('/petshow').get(PetController.petById)
 router.route('/updatepet').post(PetController.updatePet);
 /************* PET ROUTES *************/

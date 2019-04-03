@@ -18,12 +18,15 @@ class RequestHelp extends Component {
         this.user = this.props.auth.user
         this.username = this.props.auth.user.name
         this.user.stream = null
-
+          
         this.setupPusher();
         this.peers = {}
         this.callTo = this.callTo.bind(this);
         this.setupPusher = this.setupPusher.bind(this);
         this.startPeer = this.startPeer.bind(this);
+        if (this.props.auth.user.role === 'admin') {
+            this.props.setClick(this.callTo);
+        }
     }
 
     componentWillMount() {
@@ -120,20 +123,16 @@ class RequestHelp extends Component {
     }
 
     callTo(userId) {
+        alert(userId)
         this.peers[userId] = this.startPeer(userId);
     }
 
     render() { 
-       console.log(parseInt(this.user.id))
+       console.log(this.user, parseInt(this.user.id))
 
         return ( 
             <div className="main-dasboard">
               <div className="container mt-5">
-                <div className="requests">
-                {this.user.roles === 'admin' && ["5c9c9260fec4e60e9276c6e3"].map((userId) => {
-                 return   this.user.id !== userId ? <button key={userId} onClick={() => this.callTo(userId)}>Call {userId}</button> : null;
-                })}
-                </div>
                 <div className="card dash-main-card">
                     <div className="video-container">
                         <video className="my-video" ref={(ref) => {this.myVideo = ref;}}></video>              

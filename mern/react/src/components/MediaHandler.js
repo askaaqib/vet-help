@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2'
 export default class MediaHandler {
     getPermissions() {
         return new Promise ((res, rej) => {
@@ -6,7 +7,14 @@ export default class MediaHandler {
                     res(stream)
                 })
                 .catch((err) => {
-                    throw new Error(`Unable to fetch Stream ${err}`)
+                    Swal.fire({
+                    type: 'error',
+                    title: 'Unable to Access Camera',
+                    text: 'Please Allow Camera, Microphone'
+                    }).then(result => {
+                    })
+                    
+                    // throw new Error(`Unable to fetch Stream ${err}`)
                 })
             })
 
