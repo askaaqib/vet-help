@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SideBar from '../SideBar';
-import { getAllRequests } from '../../../actions/admin/requests';
+import { getAllRequests, updateRequestStatus } from '../../../actions/admin/requests';
 import RequestListElement from './RequestListElement';
 import RequestHelp from '../../requestHelp'
 
@@ -13,7 +13,7 @@ class RequestList extends Component {
     this.state = {
       showChatDialog: false
     }
-    this.startChat = this.startChat.bind(this);
+    this.acceptRequest = this.acceptRequest.bind(this);
   }
 
   componentDidMount() {
@@ -23,14 +23,19 @@ class RequestList extends Component {
     this.props.getAllRequests()
   }
 
-  startChat (user_id){
-    console.log('user', user_id)
+  acceptRequest (user_id, req_id){
+    console.log('user', user_id, req_id)
     this.setState({ showChatDialog: true })
     this.clickChild(user_id)
+    var form = new FormData();
+    form.append('status', 'accepted');
+    form.append('id', req_id);
+    this.props.updateRequestStatus(form)
+    this.props.getAllRequests()
     // console.log(id, 'hi')
   }
 
-  deleteRequest(id) {
+  declineRequest(id) {
     // console.log(id, 'hiiii')
   }
   
@@ -42,51 +47,57 @@ class RequestList extends Component {
       <div>
         <div className="d-flex" id="wrapper">
           <SideBar />
-            <RequestHelp setClick={click => this.clickChild = click} />
           <div id="page-content-wrapper">
             <div className="container-fluid">
+              <RequestHelp setClick={click => this.clickChild = click} />
               <h1 className="mt-4">Request List</h1>
                <div className="">
                 <div className=" mt-5">
                   <div className="requests">
-                  { requestList.length > 0 &&
-                    <table className="table table-bordered table-hover bg-white" width="100%">
-                    <thead>
-                      <tr>
-                        <th>Requested By</th>
-                        <th>Pet Name</th>
-                        <th>Problem</th>
-                        <th>Problem Duration</th>
-                        <th>Eating</th>
-                        <th>Weight</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                  {requestList.length > 0 && requestList.map((request, index) => {
-                    return(
-                      <RequestListElement 
-                        startChat={ this.startChat } 
-                        deleteRequest={this.deleteRequest}
-                        index={index} 
-                        key={index} 
-                        request={request} 
-                      />
+                  { requestList.length > 0 ?
+                    (
+                      <table className="table table-bordered table-hover bg-white" width="100%">
+                        <thead>
+                          <tr>
+                            <th>Requested By</th>
+                            <th>Pet Name</th>
+                            <th>Problem</th>
+                            <th>Problem Duration</th>
+                            <th>Eating</th>
+                            <th>Weight</th>
+                            <th>Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                      {requestList.length > 0 && requestList.map((request, index) => {
+                        return(
+                          <RequestListElement 
+                            acceptRequest={ this.acceptRequest } 
+                            declineRequest={this.declineRequest}
+                            index={index} 
+                            key={index} 
+                            request={request} 
+                          />
+                        )
+                          }) 
+                      }
+                      </tbody>
+                      </table>
+                    ) : (
+                      <h5>No Pending Requests Found</h5>
                     )
-                      }) 
-                  }
-                  </tbody>
-                  </table>
                   }
                   </div>
-                  <div className="card dash-main-card">
-                    {
-                      totalpage !== null && 
-                      <div>
-                        {Array.from({ length: totalpage }, (v, k) => <button key={k+1}>{k+1}</button>)}
-                      </div>
-                    }
-                  </div>
+                  { requestList.length > 0 &&
+                    <div className="card dash-main-card">
+                      {
+                        totalpage !== null && 
+                        <div>
+                          {Array.from({ length: totalpage }, (v, k) => <button key={k+1}>{k+1}</button>)}
+                        </div>
+                      }
+                    </div>
+                  }
                 </div>
               </div>
             </div>
@@ -110,4 +121,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors
 })
 
-export  default connect(mapStateToProps, { getAllRequests })(RequestList)
+export  default connect(mapStateToProps, { getAllRequests, updateRequestStatus })(RequestList)

@@ -20,6 +20,10 @@ const ChatSchema = new Schema({
 	videos: {
 		type: Array
 	},
+	status: {
+		type: String,
+		default: 'pending'
+	},
   _pet: {
     type: Schema.Types.ObjectId,
     ref: 'pet'

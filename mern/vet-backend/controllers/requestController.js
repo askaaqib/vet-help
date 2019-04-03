@@ -20,11 +20,11 @@ export const getAllRequests = (req, res) => {
   query.skip = size * (pageNo - 1)
   query.limit = size
   // Find some documents
-  Chat.count({},function(err,totalCount) {
+  Chat.countDocuments({},function(err,totalCount) {
     if(err) {
       response = {"error" : true, "message" : "Error fetching data"}
     }
-    var query = Chat.find().populate({path: '_pet', populate: { path: '_user'}});
+    var query = Chat.find({status: 'pending'}).populate({path: '_pet', populate: { path: '_user'}});
     query.exec(function (err, data) {
       // Mongo command to fetch all data from collection.
       if(err) {
@@ -35,15 +35,21 @@ export const getAllRequests = (req, res) => {
       }
       res.json(response);
     })
-    // Chat.find({},{},query,function(err,data) {
-    //   // // Mongo command to fetch all data from collection.
-    //   // if(err) {
-    //   //   response = {"error" : true, "message" : "Error fetching data"};
-    //   // } else {
-    //   //   var totalPages = Math.ceil(totalCount / size)
-    //   //   response = {"error" : false, "message" : data,"pages": totalPages};
-    //   // }
-    //   // res.json(response);
-    // });
   })
+}
+
+export const updateRequestStatus = (req,res) => {
+  Chat.findById(req.body.id, function(err, chat) {
+    if (!chat)
+			res.status(404).send("data is not found");
+		else {
+				chat.status = req.body.status;
+        chat.save().then(pet => {
+          res.json('Update complete');
+      })
+      .catch(err => {
+            res.status(400).send("unable to update the database");
+      });
+    }
+	})
 }

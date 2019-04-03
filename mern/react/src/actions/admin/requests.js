@@ -18,8 +18,14 @@ export const getAllRequests = () => dispatch => {
     });
 }
 
+export const updateRequestStatus = (data) => dispatch => {
+  axios.post('api/updateRequestStatus', data).then(res => {
+    console.log(res)
+  })
+}
+
+/************ DISPATCH METHODS ************/
 export const setAllRequest = requestList => {
-   
   return {
     type: GET_ALL_REQUESTS,
     payload:requestList
@@ -27,9 +33,9 @@ export const setAllRequest = requestList => {
 }
 
 export const totalPage = totalpage => {
-   
   return {
     type: TOTAL_PAGES,
     payload:totalpage
   }
 }
+/************ DISPATCH METHODS ************/

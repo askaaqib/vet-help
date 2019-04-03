@@ -31,6 +31,7 @@ router.route('/deletepet').post(PetController.deletePet);
 /*********** ADMIN ROUTES ***********/
 router.route('/getAllusers').get(UserController.getAllUsers);
 router.route('/getAllrequests').get(RequestController.getAllRequests);
+router.route('/updateRequestStatus').post(RequestController.updateRequestStatus);
 /*********** ADMIN ROUTES ***********/
 
 router.route('/petshow').get(PetController.petById)

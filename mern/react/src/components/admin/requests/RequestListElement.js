@@ -19,10 +19,16 @@ class RequestListElement extends Component {
         <td>{request.weight} KG</td>
         <td>
           <button
-            onClick={() => this.props.startChat(request._pet._user._id)}
+            onClick={() => this.props.acceptRequest(request._pet._user._id, request._id)}
             className="btn btn-primary"
           >
-            Start Chat
+            Accept Request
+          </button>
+          <button
+            onClick={() => this.props.declineRequest(request._id)}
+            className="btn btn-primary"
+          >
+            Accept Request
           </button>
         </td>
       </tr>
