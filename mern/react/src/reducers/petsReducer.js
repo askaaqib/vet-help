@@ -1,11 +1,11 @@
-import { SET_PETS_LIST, SELECT_PET, PET_EDIT_SHOW, REQUEST_HELP_PENDING } from '../actions/types';
+import { SET_PETS_LIST, SELECT_PET, PET_EDIT_SHOW, PET_ALL_NOTES } from '../actions/types';
 // import isEmpty from '../is-empty';
 
 const initialState = {
   petsList: {},
   selectedPet: null,
   showPet: null,
-  pendingRequestHelp: null
+  petNotes: null
 }
 
 export default function (state= initialState, action) {
@@ -25,11 +25,11 @@ export default function (state= initialState, action) {
         ...state,
         showPet: action.showPet
       }
-    case REQUEST_HELP_PENDING:
+    case PET_ALL_NOTES:
       return {
         ...state,
-        pendingRequestHelp: true
-      }
+        petNotes: action.petNotes
+      }  
     default:
       return state;
   }

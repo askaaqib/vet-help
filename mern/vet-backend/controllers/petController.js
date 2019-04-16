@@ -121,8 +121,9 @@ export const deletePet = async (req, res) => {
 /******************* SHOW ALL PETS METHOD *******************/
 export const allPets = async (req, res) => {
 		var userId = req.query.user_id
-		Pet.find({ _user: userId }).then(Pet => {
-			res.json(Pet)
+		Pet.find({ _user: userId }).populate('_chat').exec(function (err, pet) {
+			if (err) return handleError(err);
+			res.json(pet)
 		})
 		// return res.json({"something": 'seomthig'});
 }
@@ -145,6 +146,7 @@ export const registerPetChat = async (req, res)  => {
 		var Images = JSON.parse(req.body.images)
 		Images.map((image, index) => {
 			var filename = Date.now() + '-' + image.path
+			filename = filename.replace(/\s+/g, '-').toLowerCase();
 			var newpath = '../react/public/images/chats/' + filename
 			var img = image.buffer
 			var data = img.replace(/^data:image\/\w+;base64,/, "");
@@ -163,6 +165,7 @@ export const registerPetChat = async (req, res)  => {
 	if (req.files.videos) {
 		var oldpath = req.files.videos.file
 		videoname = Date.now() + '-' + req.files.videos.filename
+		videoname = videoname.replace(/\s+/g, '-').toLowerCase();
 		var newpath = '../react/public/images/chats/' + videoname
 		fs.createReadStream(oldpath);
 		var readerStream = fs.createReadStream(oldpath);
@@ -182,7 +185,29 @@ export const registerPetChat = async (req, res)  => {
 
 	newChat.save()
 		.then(Chat => {
-			res.json(Chat)
+			/********** PUSH INTO PET ChATS ARRAY **********/
+			Pet.findById(req.body.pet, function(err, pet) {
+				if (!pet)
+					res.status(404).send("data is not found");
+				else {
+					pet._chat.push(Chat);
+					pet.save().then(pet => {
+						res.json(Chat)
+					})
+					.catch(err => {
+						res.status(400).send("unable to update the database");
+					});
+				}
+			})
 		});
+}
 
+/******************* GET PETS NOTES METHOD *******************/
+export const petNotes = async (req, res) => {
+	var petId = req.query.id
+	Pet.findById(petId).populate('_chat').then(pet => {
+		res.json(pet)
+	}).catch(err => {
+		res.status(400).send("Bad Request");
+	});
 }

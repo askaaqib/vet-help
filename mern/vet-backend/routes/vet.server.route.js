@@ -26,12 +26,15 @@ router.route('/createpet').post(PetController.createPet);
 router.route('/pets').get(PetController.allPets);
 router.route('/registerpetchat').post(PetController.registerPetChat);
 router.route('/deletepet').post(PetController.deletePet);
+router.route('/pet/notesall').get(PetController.petNotes);
 
 // router.route('/pet:id').get(PetController.editPet)
 /*********** ADMIN ROUTES ***********/
 router.route('/getAllusers').get(UserController.getAllUsers);
 router.route('/getAllrequests').get(RequestController.getAllRequests);
 router.route('/updateRequestStatus').post(RequestController.updateRequestStatus);
+router.route('/getRequestById').get(RequestController.getRequestById);
+router.route('/uploadNotes').post(RequestController.uploadNotes);
 /*********** ADMIN ROUTES ***********/
 
 router.route('/petshow').get(PetController.petById)

@@ -34,6 +34,10 @@ class PetsList extends Component {
 		this.props.history.push('/petregister')
 	}
 
+	viewNotes(pet) {
+		this.props.history.push('/pets/notes/' + pet._id)
+	}
+
 	deletePet(pet) {
 		Swal.fire({
 			title: 'Delete ' + pet.name,
@@ -56,6 +60,8 @@ class PetsList extends Component {
 	}
 	render() {
 		const { pets } = this.props
+		console.log(pets)
+		var Found = false
 		function PetsList(props) {
 			const list = props.petsList;
 			if (list.length > 0) {
@@ -78,6 +84,16 @@ class PetsList extends Component {
 							</div>
 							<div className="col-md-3 actions-block text-right">
 								<button onClick={ () => props.onChat(pet) } className="btn btn-primary btn-md">Chat With Vet</button>
+								{ pet._chat && pet._chat.length > 0 && pet._chat.map((chat, index) => {
+										if(chat.notes && chat.notes.length > 0) {
+											Found = true
+										}
+								})
+								}
+								{ Found === true && 
+									<button key={ index } onClick={ () => props.viewNotes(pet) } className="btn btn-success mt-1">View Case Notes</button>
+								}
+								{ Found = false}
 							</div>
 						</div>
 					</div>
@@ -106,6 +122,7 @@ class PetsList extends Component {
 										onDelete={ this.deletePet.bind(this) }
 										onChat={ this.ChatVet.bind(this) }
 										petsList={ pets.petsList }
+										viewNotes= { this.viewNotes.bind(this) }
 									/>
 								</div>
 							</div>

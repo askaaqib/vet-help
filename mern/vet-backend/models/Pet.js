@@ -23,7 +23,11 @@ const PetSchema = new Schema({
 	_user: {
     type: Schema.Types.ObjectId,
     ref: 'user'
-  }
+	},
+	_chat: [{
+		type: Schema.Types.ObjectId,
+		ref: 'chat'
+	}]
 });
 
 const Pet = mongoose.model('pet', PetSchema );

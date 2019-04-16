@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SideBar from '../SideBar';
-import { getAllRequests, updateRequestStatus } from '../../../actions/admin/requests';
+import { getAllRequests, updateRequestStatus, getRequestDetails } from '../../../actions/admin/requests';
 import RequestListElement from './RequestListElement';
+import RequestDetails from './RequestDetails';
+import CaseNotes from './CaseNotes';
 import RequestHelp from '../../requestHelp'
 
 
@@ -20,6 +22,7 @@ class RequestList extends Component {
 		if(!this.props.auth.isAuthenticated && this.props.auth.roles !== 'admin') {
 			this.props.history.push('/login');
     }
+    console.log(this.props)
     this.props.getAllRequests()
   }
 
@@ -30,7 +33,8 @@ class RequestList extends Component {
     var form = new FormData();
     form.append('status', 'accepted');
     form.append('id', req_id);
-    this.props.updateRequestStatus(form)
+    this.props.getRequestDetails(req_id)
+    // this.props.updateRequestStatus(form)
     this.props.getAllRequests()
     // console.log(id, 'hi')
   }
@@ -39,17 +43,37 @@ class RequestList extends Component {
     // console.log(id, 'hiiii')
   }
   
+  componentWillReceiveProps(nextProps) {
+    // console.log(nextProps)
+  }
+
   render() { 
-    // console.log(this.props)
-    const  { requestList, totalpage } = this.props.requests;
+    console.log(this.props)
+    const  { requestList, totalpage, requestDetails } = this.props.requests;
     const { showChatDialog } = this.state
     return ( 
       <div>
         <div className="d-flex" id="wrapper">
           <SideBar />
           <div id="page-content-wrapper">
-            <div className="container-fluid">
-              <RequestHelp setClick={click => this.clickChild = click} />
+            <div className="container-fluid request-help">
+              <div className="row">
+                <div className="col-md-6">
+                  <RequestHelp setClick={click => this.clickChild = click} />
+                </div>
+                <div className="col-md-6 notes pt-3">
+                  <CaseNotes requestDetails={requestDetails}></CaseNotes>
+                </div>
+              </div>
+              <div className="row mt-2">
+                <div className="col-md-12">
+                  {requestDetails && 
+                    (
+                      <RequestDetails requestDetails={requestDetails} />
+                    )
+                  }
+                </div>
+              </div>
               <h1 className="mt-4">Request List</h1>
                <div className="">
                 <div className=" mt-5">
@@ -121,4 +145,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors
 })
 
-export  default connect(mapStateToProps, { getAllRequests, updateRequestStatus })(RequestList)
+export  default connect(mapStateToProps, { getAllRequests, updateRequestStatus, getRequestDetails })(RequestList)

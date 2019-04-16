@@ -22,13 +22,13 @@ class RequestListElement extends Component {
             onClick={() => this.props.acceptRequest(request._pet._user._id, request._id)}
             className="btn btn-primary"
           >
-            Accept Request
+            Start
           </button>
           <button
             onClick={() => this.props.declineRequest(request._id)}
             className="btn btn-primary"
           >
-            Accept Request
+            Reject
           </button>
         </td>
       </tr>

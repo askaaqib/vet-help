@@ -53,3 +53,30 @@ export const updateRequestStatus = (req,res) => {
     }
 	})
 }
+
+export const getRequestById = (req,res) => {
+  var query = Chat.findById(req.query.id).populate({path: '_pet', populate: { path: '_user'}});
+  query.exec(function (err, chat) {
+    if (!chat)
+			res.status(404).send("data is not found");
+		else {
+      res.json(chat);
+    }
+	})
+}
+
+export const uploadNotes = (req,res) => {
+  Chat.findById(req.body.id, function(err, chat) {
+    if (!chat)
+			res.status(404).send("data is not found");
+		else {
+				chat.notes = req.body.notes;
+        chat.save().then(pet => {
+          res.json('Update complete');
+      })
+      .catch(err => {
+            res.status(400).send("unable to update the database");
+      });
+    }
+	})
+}

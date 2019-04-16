@@ -159,6 +159,8 @@ RequestHelp.propTypes = {
 
 const mapStateToProps = (state) => ({
 	auth: state.auth,
+	requests: state.requests,
+	pets: state.pets
 })
 
 export  default connect(mapStateToProps)(RequestHelp)

@@ -1,6 +1,6 @@
 // authentication.js
 import axios from 'axios';
-import { GET_ERRORS, SET_PETS_LIST, SELECT_PET, PET_EDIT_SHOW, REQUEST_HELP_PENDING } from './types';
+import { GET_ERRORS, SET_PETS_LIST, SELECT_PET, PET_EDIT_SHOW, REQUEST_HELP_PENDING, PET_ALL_NOTES } from './types';
 // var multer  = require('multer')REQUEST_HELP_PENDING
 // var upload = multer({ dest: 'public/uploads' })
 
@@ -41,7 +41,11 @@ export const deleteSelectedPet = (pet, history) => dispatch => {
 export const registerPetChat = (pet, history) => dispatch => {
 	axios.post('/api/registerpetchat', pet).then(res => {
 			history.push('/requesthelp')
-			dispatch({type: REQUEST_HELP_PENDING})
+			dispatch({
+				type: REQUEST_HELP_PENDING,
+				pendingRequestList: res.data
+			})
+			window.location.reload()
 		})
 		.catch(err => {
 			dispatch({
@@ -78,6 +82,17 @@ export const getPetDetails = (petId) => dispatch => {
 	})
 }
 
+/********* GET ALL NOTES BY PET ID METHOD *********/
+export const getAllPetNotes = (petId) => dispatch => {
+	axios.get('/api/pet/notesall', {
+		params: {
+			id: petId
+		}
+	}).then(res => {
+		dispatch(setAllPetNotes(res.data._chat))
+	})
+}
+
 /*******************************************/
 /******** DISPATCH METHODS HERE ************/
 /*******************************************/
@@ -103,5 +118,13 @@ export const setPetShowById = showPet => {
 	return {
 		type: PET_EDIT_SHOW,
 		showPet: showPet
+	}
+}
+
+/********  SELECTED PET NOTE DISPATCH ********/
+export const setAllPetNotes = petNotes => {
+	return {
+		type: PET_ALL_NOTES,
+		petNotes: petNotes
 	}
 }

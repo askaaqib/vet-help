@@ -361,3 +361,20 @@ ul.pets-list {
   margin-top: 20px;
   background: #ececec;
 }
+.request-help .nav-tabs .nav-link.active{
+  background-color: #5a5adc;
+  color: white;
+}
+.request-help .notes textarea {
+  resize: none;
+}
+.request-help .nav-tabs .nav-item {
+  background: #e6e3e3;
+  margin: 1px 9px 0 0;
+  border-radius: 3px;
+}
+.pet-info-tab .pet-img img{
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+}

@@ -24,6 +24,9 @@ const ChatSchema = new Schema({
 		type: String,
 		default: 'pending'
 	},
+	notes: {
+		type: String
+	},
   _pet: {
     type: Schema.Types.ObjectId,
     ref: 'pet'
