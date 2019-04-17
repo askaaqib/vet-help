@@ -3,14 +3,22 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAllPetNotes } from '../actions/petprofile';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import Button from 'react-bootstrap/Button'
+
 //import '../'
 
 class PetNotes extends Component {
 	constructor(props) {
 		super(props);
 			this.state = {
+				detailNotes: null,
+				showDetailNotes: false,
 				errors: {}
 			}
+			this.backToNotesList = this.backToNotesList.bind(this)
 	}
 
 	componentDidMount() {
@@ -23,23 +31,43 @@ class PetNotes extends Component {
 
 	componentWillReceiveProps(nextProps) {}
 
+	viewNoteDetails(details) {
+		this.setState({
+			showDetailNotes: true,
+			detailNotes: details
+		})
+	}
+
+	backToNotesList() {
+		this.setState({
+			showDetailNotes: false,
+			detailNotes: null
+		})
+		var petId = this.props.match.params.id
+		this.props.history.push('/pets/notes/' + petId)
+	}
 	render() {
 		console.log(this.props)
 		const { petNotes } = this.props.pets
+		const showDetailNotes = this.state.showDetailNotes
+		const detailNotes = this.state.detailNotes
 		function NotesList(props) {
 			const list = props.petNotes;
 			if (list && list.length > 0) {
 				const listPets = list.map((pet, index) =>
-						<li key={ index } className="row">
+						<div key={ index } className="row">
 						{ pet.notes &&
 							(
-								<p>{ pet.notes }</p>
+								<div className="notes-list">
+									<p className="note-title">{ (pet.notes.length > 100) ? pet.notes.substring(0,100) + '...' : pet.notes }</p>
+									<button onClick={ () => props.viewNoteDetails(pet.notes) } className="btn btn-primary btn-view">View</button>
+								</div>
 							)
 						}
-						</li>
+						</div>
 				);
 				return (
-					<ul className="col-md-12 notes-list">{listPets}</ul>
+					<ul className="col-md-12">{listPets}</ul>
 				);
 			} else {
 				return (
@@ -52,10 +80,38 @@ class PetNotes extends Component {
 				<div className="container mt-5">
 					<div className="card dash-main-card">
 						<div className="card-header">
-							<label>Case Notes</label>
+							{ showDetailNotes ?
+								(
+									<div className="petlist-head">
+										<label>Note Details</label>
+										<Button
+											variant="link"
+											onClick={ this.backToNotesList}
+										>
+											<FontAwesomeIcon icon={ faArrowLeft }/> Back to Pet Notes
+										</Button>
+									</div>
+								) : (
+									<div className="petlist-head">
+									<label>Case Notes</label>
+									<Link to="/pets"><FontAwesomeIcon icon={ faArrowLeft } /> Back to Pets List</Link>
+									</div>
+								)
+							}
 						</div>
 						<div className="card-body">
-							<NotesList petNotes= { petNotes }></NotesList>
+						{ showDetailNotes ?
+							(
+								<div>
+									<p>{ detailNotes }</p>
+								</div>
+							) : (
+								<NotesList
+									petNotes= { petNotes }
+									viewNoteDetails= { this.viewNoteDetails.bind(this) }
+								></NotesList>
+							)
+						}
 						</div>
 					</div>
 				</div>

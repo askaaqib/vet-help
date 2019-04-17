@@ -6,6 +6,8 @@ import { createPetProfile } from '../actions/petprofile';
 import classnames from 'classnames';
 //import '../'
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 class CreateProfile extends Component {
 	constructor(props) {
@@ -68,8 +70,9 @@ class CreateProfile extends Component {
 			<div className="main-dasboard">
 				<div className="container mt-5">
 					<div className="card dash-main-card">
-						<div className="card-header">
+						<div className="card-header petlist-head">
 							<label>Create Pet Profile</label>
+							<Link to="/pets"><FontAwesomeIcon icon={ faArrowLeft }/> Back to Pets List</Link>
 						</div>
 						<div className="card-body">
 							<div className="container">

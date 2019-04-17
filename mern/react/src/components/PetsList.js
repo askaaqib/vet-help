@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAllPets, setSelectedPet, deleteSelectedPet } from '../actions/petprofile';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faPen, faTrash, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import Swal from 'sweetalert2'
 
 class PetsList extends Component {
@@ -113,7 +113,10 @@ class PetsList extends Component {
 					<div className="card dash-main-card">
 						<div className="card-header petlist-head">
 							<label>Pets List</label>
-							<Link to="/createprofile" className="btn btn-primary">Add New Pet</Link>
+							<div>
+								<Link to="/dashboard"><FontAwesomeIcon icon={ faArrowLeft }/> Back to Dashboard</Link>
+								<Link to="/createprofile" className="btn btn-primary ml-2">Add New Pet</Link>
+							</div>
 						</div>
 						<div className="card-body">
 							<div className="container">

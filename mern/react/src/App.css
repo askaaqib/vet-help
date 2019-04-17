@@ -378,3 +378,12 @@ ul.pets-list {
   height: 300px;
   border-radius: 50%;
 }
+.notes-list {
+  width: 100%;
+}
+.notes-list .note-title {
+  float: left;
+}
+.notes-list .btn-view {
+  float:right
+}
