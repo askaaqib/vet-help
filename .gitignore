@@ -2,5 +2,5 @@
 /mern/vet-backend/package-lock.json
 /mern/react/package-lock.json
 /mern/react/node_modules
-/mern/react/public/images/pets
-mern/react/public/images/chats
+/mern/react/public/images/pets/
+mern/react/public/images/chats/
