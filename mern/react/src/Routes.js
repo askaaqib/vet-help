@@ -22,8 +22,10 @@ import UserLIst from './components/admin/users/UsersList';
 import RequestLIst from './components/admin/requests/RequestsList';
 import EditPet from './components/EditPet';
 import PetNotes from './components/PetNotes';
+import Pusher from 'pusher-js';
+const APP_KEY = '92e8a4cbd51aaee54132';
 
-  if(localStorage.jwtToken) {
+if(localStorage.jwtToken) {
     setAuthToken(localStorage.jwtToken);
     const decoded = jwt_decode(localStorage.jwtToken);
     store.dispatch(setCurrentUser(decoded));

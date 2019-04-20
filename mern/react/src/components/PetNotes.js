@@ -59,8 +59,21 @@ class PetNotes extends Component {
 						{ pet.notes &&
 							(
 								<div className="notes-list">
-									<p className="note-title">{ (pet.notes.length > 100) ? pet.notes.substring(0,100) + '...' : pet.notes }</p>
-									<button onClick={ () => props.viewNoteDetails(pet.notes) } className="btn btn-primary btn-view">View</button>
+								{ pet.notes.length > 100 ?
+									(
+										<div>
+											<div className="note-title" dangerouslySetInnerHTML={{ __html: pet.notes.substring(0,100) + '...' }}></div>
+											{/* <p className="note-title">{ pet.notes.substring(0,100) }</p> */}
+											<button onClick={ () => props.viewNoteDetails(pet.notes) } className="btn btn-primary btn-view mt-2">View Details</button>
+										</div>
+									) : (
+											<div>
+												<div className="note-title" dangerouslySetInnerHTML={{ __html: pet.notes }}></div>
+												<button onClick={ () => props.viewNoteDetails(pet.notes) } className="btn btn-primary btn-view mt-2">View Details</button>
+											</div>
+										)
+								}
+									{/* <p className="note-title">{ (pet.notes.length > 100) ? pet.notes.substring(0,100) + '...' : pet.notes }</p> */}
 								</div>
 							)
 						}
@@ -103,7 +116,8 @@ class PetNotes extends Component {
 						{ showDetailNotes ?
 							(
 								<div>
-									<p>{ detailNotes }</p>
+									<div className="note-title" dangerouslySetInnerHTML={{ __html: detailNotes }}></div>
+									{/* <p>{ detailNotes }</p> */}
 								</div>
 							) : (
 								<NotesList

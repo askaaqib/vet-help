@@ -35,15 +35,13 @@ class  UserHome extends Component {
                   <Link to="/pets" className="btn btn-primary btn_dashboard">View All Pets</Link>
                 </div>
               </div>
-              <div className="card col-xs-12 col-lg-3 dash_card m-1">
-                {/* <img className="card-img-top" src={avatar} alt="Card image"
-                style={{ width: '100%'}} /> */}
+              {/* <div className="card col-xs-12 col-lg-3 dash_card m-1">
                 <div className="card-body">
                   <h5 className="card-title">Connect Consultant</h5>
                   <p className="card-text">Some example text some example text. John Doe is an architect and engineer</p>
                   <Link to="#" className="btn btn-primary btn_dashboard">Create Profile</Link>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

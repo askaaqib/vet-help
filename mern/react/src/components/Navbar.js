@@ -22,7 +22,7 @@ class Navbar extends Component {
             <ul className="navbar ml-auto">
                 <Link style={{ color: "#fff" }} to="/dashboard" className="nav-link">Dashboard</Link>
                 <Link style={{ color: "#fff" }} to="/createprofile" className="nav-link">Create Profile</Link>
-                <Link style={{ color: "#fff" }} to="/requesthelp" className="nav-link">Request Help</Link>
+                {/* <Link style={{ color: "#fff" }} to="/requesthelp" className="nav-link">Request Help</Link> */}
                 <Link style={{ color: "#fff" }} to="#" className="nav-link" onClick={this.onLogout.bind(this)}>
                 {user.name }
                 <img src={user.avatar} alt={user.name} title={user.name}

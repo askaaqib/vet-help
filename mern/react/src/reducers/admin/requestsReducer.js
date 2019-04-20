@@ -1,9 +1,9 @@
 import { GET_ALL_REQUESTS, TOTAL_PAGES, REQUEST_HELP_PENDING, GET_REQUEST_DETAILS } from '../../actions/types';
-// import isEmpty from '../is-empty';
+// import isEmpty from '../../is-empty';
 
 const initialState = {
   requestList: [],
-  pendingRequestList: null,
+  pendingRequestList: [],
   totalpage: null,
   requestDetails: null
 }
@@ -18,7 +18,7 @@ export default function (state= initialState, action) {
     case REQUEST_HELP_PENDING:
       return {
           ...state,
-          pendingRequestList: action.pendingRequestList
+          pendingRequestList: state.pendingRequestList.concat(action.pendingRequestList)
       }
     case GET_REQUEST_DETAILS:
       return {

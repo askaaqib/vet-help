@@ -31,11 +31,15 @@ class RequestDetails extends Component {
     function PreviewVideos(props){
       const getFiles = props.videos
       if (getFiles.length > 0) {
-        const listPreview = getFiles.map((item, index) => 
-          <div className="col-md-6" key={ index}>
-            <video key={index} src={'/images/chats/' + item } width="100%" height="100%" controls/>
-          </div>
-        );
+        const listPreview = getFiles.map((item, index) => {
+          if (item) {
+            return (
+              <div className="col-md-6" key={ index}>
+                <video key={index} src={'/images/chats/' + item } width="100%" height="100%" controls/>
+              </div>
+            )
+          }
+        });
         return (
           <div className="row uploaded-media uploaded-videos">{ listPreview }</div>
         )

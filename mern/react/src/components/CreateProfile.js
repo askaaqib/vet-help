@@ -140,8 +140,8 @@ class CreateProfile extends Component {
 													onChange={ this.handleInputChange } 
 												/>
 											</div>
-											<Link to="/dashboard" className="btn btn-primary mr-2">Back</Link>
-											<button onClick={ this.addProfile }className="btn btn-primary">Add</button>
+											{/* <Link to="/dashboard" className="btn btn-primary mr-2">Back</Link> */}
+											<button onClick={ this.addProfile }className="btn login-btn-primary">Submit</button>
 										</form>
 									</div>
 								</div>

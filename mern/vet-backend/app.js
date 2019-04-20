@@ -12,6 +12,8 @@ import vetRoutes from './routes/vet.server.route';
 import config from './models/vet.server.model';
 // define our app using express
 const app = express();
+// const Pusher = require('pusher');
+
 // express-busboy to parse multipart/form-data
 bb.extend(app, {
   upload: true,
@@ -25,6 +27,14 @@ app.use(function(req,res,next){
   next();
 })
 
+// const pusher =  new Pusher({
+//   appId: '745676',
+//   key: '92e8a4cbd51aaee54132',
+//   secret: '60c1fec3508f2681a5da',
+//   cluster: 'ap2',
+//   encrypted: true
+// });
+// const channel = 'chats-changes'
 // app.use(cors())
 // configure app
 app.use(logger('dev'));
@@ -40,8 +50,42 @@ mongoose.connect(config.DB, { useNewUrlParser: true }).then(
   () => {console.log('Database is connected') },
   err => { console.log('Can not connect to the database'+ err)}
 );
+// const db = mongoose.connection;
+// db.once('open', () => {
+//   app.listen(9000, () => {
+//     console.log('Node server running on port 9000');
+//   });
 
-
+//   const taskCollection = db.collection('chats');
+//   const changeStream = taskCollection.watch();
+  
+//   changeStream.on('change', (change) => {
+//     console.log(change)
+//     if(change.operationType === 'insert') {
+//       const task = change.fullDocument;
+//       pusher.trigger(
+//         channel,
+//         'inserted', 
+//         {
+//           id: task._id,
+//           task: task.task,
+//         }
+//       ); 
+//     } else if(change.operationType === 'delete') {
+//       pusher.trigger(
+//         channel,
+//         'deleted', 
+//         change.documentKey._id
+//       );
+//     }  else if(change.operationType === 'update') {
+//       pusher.trigger(
+//         channel,
+//         'update', 
+//         change.documentKey._id
+//       );
+//     }
+//   });
+// });
 // add Source Map Support
 SourceMapSupport.install();
 

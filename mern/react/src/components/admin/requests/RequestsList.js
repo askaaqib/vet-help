@@ -22,12 +22,10 @@ class RequestList extends Component {
 		if(!this.props.auth.isAuthenticated && this.props.auth.roles !== 'admin') {
 			this.props.history.push('/login');
     }
-    console.log(this.props)
     this.props.getAllRequests()
   }
 
   acceptRequest (user_id, req_id){
-    console.log('user', user_id, req_id)
     this.setState({ showChatDialog: true })
     this.clickChild(user_id)
     var form = new FormData();

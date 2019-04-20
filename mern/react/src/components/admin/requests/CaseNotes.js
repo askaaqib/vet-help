@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { uploadNotes } from '../../../actions/admin/requests';
+import CKEditor from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 class CaseNotes extends Component {
   constructor(props) {
@@ -14,9 +16,9 @@ class CaseNotes extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  handleInputChange(e) {
+  handleInputChange(data) {
     this.setState({
-      [e.target.name]: e.target.value
+      notes: data
     })	
   }
   
@@ -35,12 +37,33 @@ class CaseNotes extends Component {
           (
             <div>
               <h4>Take Case Notes</h4>
-              <textarea
+              <CKEditor
+                editor={ ClassicEditor }
+                width="200"
+                height="800"
+                data="<p></p>"
+                onInit={ editor => {
+                    // You can store the "editor" and use when it is needed.
+                    console.log( 'Editor is ready to use!', editor );
+                } }
+                onChange={ ( event, editor ) => {
+                    const data = editor.getData();
+                    console.log( { event, editor, data } );
+                    this.handleInputChange(data)
+                } }
+                onBlur={ editor => {
+                    console.log( 'Blur.', editor );
+                } }
+                onFocus={ editor => {
+                    console.log( 'Focus.', editor );
+                } }
+              />
+              {/* <textarea
                 rows="16"
                 cols="80"
                 onChange={ this.handleInputChange }
                 name="notes"
-              ></textarea>
+              ></textarea> */}
               <button onClick={ this.uploadCaseNotes }className="btn btn-primary">Upload Notes</button>
             </div>
           )

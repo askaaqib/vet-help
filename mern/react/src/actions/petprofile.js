@@ -40,12 +40,13 @@ export const deleteSelectedPet = (pet, history) => dispatch => {
 /********* PET REGISTER FOR SELECTED PET *********/
 export const registerPetChat = (pet, history) => dispatch => {
 	axios.post('/api/registerpetchat', pet).then(res => {
-			history.push('/requesthelp')
 			dispatch({
 				type: REQUEST_HELP_PENDING,
 				pendingRequestList: res.data
 			})
-			window.location.reload()
+			// history.push('/requesthelp?type=user&session='+ res.data._id)
+			history.push('/requesthelp')
+			// window.location.reload()
 		})
 		.catch(err => {
 			dispatch({

@@ -6,6 +6,8 @@ import { getPetDetails, updatePetProfile } from '../actions/petprofile';
 import classnames from 'classnames';
 //import '../'
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 class CreateProfile extends Component {
 	constructor(props) {
@@ -85,8 +87,9 @@ class CreateProfile extends Component {
 			<div className="main-dasboard pet-edit">
 				<div className="container mt-5">
 					<div className="card dash-main-card">
-						<div className="card-header">
-							<label>Create Pet Profile</label>
+					<div className="card-header petlist-head">
+							<label>Update Pet Profile</label>
+							<Link to="/pets"><FontAwesomeIcon icon={ faArrowLeft }/> Back to Pets List</Link>
 						</div>
 						<div className="card-body">
 							<div className="container">
@@ -146,8 +149,8 @@ class CreateProfile extends Component {
 													/>
 													{ errors.age && (<div className="invalid-feedback">{errors.age}</div>) }
 											</div>
-											<Link to="/pets" className="btn btn-primary mr-2">Back to list</Link>
-											<button onClick={ this.addProfile }className="btn btn-primary">Update</button>
+											{/* <Link to="/pets" className="btn btn-primary mr-2">Back to list</Link> */}
+											<button onClick={ this.addProfile }className="btn login-btn-primary">Update</button>
 										</form>
 									</div>
                   <div className="col-md-6">

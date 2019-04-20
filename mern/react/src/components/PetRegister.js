@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight, faWindowClose, faCamera } from '@fortawesome/free-solid-svg-icons'
 import { setSelectedPet, registerPetChat } from '../actions/petprofile';
 import Dropzone from 'react-dropzone'
+import classnames from 'classnames';
 
 class PetRegister extends Component {
   
@@ -26,7 +27,7 @@ class PetRegister extends Component {
         errors: {},
         showStepOne: true,
         showStepTwo: false,
-        deleteImage: null
+        deleteImage: null,
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.clickStepOne = this.clickStepOne.bind(this);
@@ -47,7 +48,14 @@ class PetRegister extends Component {
     }
 	}
 
-  componentWillReceiveProps(props) {}
+  componentWillReceiveProps(nextProps) {
+		if(nextProps.errors) {
+				this.setState({
+						errors: nextProps.errors
+				});
+		}
+  }
+  
   handleInputChange(e) {
     if (e.target.files) {
       this.setState({ [e.target.name] : Array.from(e.target.files)})
@@ -169,6 +177,7 @@ class PetRegister extends Component {
     const { selectedPet } = this.props.pets
     const { images } = this.state 
     const { videos } = this.state
+    const { errors  } = this.state
     function PreviewImages(props){
       const getFiles = props.images
       if (getFiles.length > 0) {
@@ -229,38 +238,41 @@ class PetRegister extends Component {
                         <h4>What's Wrong with { selectedPet.name } Today?</h4>
                         <input
                           type="text"
-                          className="form-control"
+													className={ classnames('form-control', {'is-invalid': errors.problem})}
                           name="problem"
                           onChange={ this.handleInputChange }
                           value= { this.state.problem }
                         />
+												{ errors.problem && (<div className="invalid-feedback">{errors.problem}</div>) }
                       </div>
                       <div className="row form-group">
                         <h4>How long { selectedPet.name } has this problem?</h4>
                         <input
                           type="text"
-                          className="form-control"
+													className={ classnames('form-control', {'is-invalid': errors.problem_duration})}
                           name="problem_duration"
                           onChange={ this.handleInputChange }
                           value= { this.state.problem_duration }
                         />
+												{ errors.problem_duration && (<div className="invalid-feedback">{errors.problem_duration}</div>) }
                       </div>
                       <div className="row form-group">
                         <h4>{ selectedPet.name } has been eating (including all medication and supplements):</h4>
                         <input
                           type="text"
-                          className="form-control"
+													className={ classnames('form-control', {'is-invalid': errors.eating})}
                           name="eating"
                           onChange={ this.handleInputChange }
                           value= { this.state.eating }
                         />
+												{ errors.eating && (<div className="invalid-feedback">{errors.eating}</div>) }
                       </div>
                       <div className="row form-group">
                         <h4>{ selectedPet.name }'s Weight (Good to input)</h4>
                         <div className="input-group mb-3">
                         <input
                           type="number"
-                          className="form-control"
+													className={ classnames('form-control', {'is-invalid': errors.weight})}
                           name="weight"
                           onChange={ this.handleInputChange }
                           value= { this.state.weight }
@@ -268,6 +280,7 @@ class PetRegister extends Component {
                           <div className="input-group-append">
                             <span className="input-group-text">KG</span>
                           </div>
+												  { errors.weight && (<div className="invalid-feedback">{errors.weight}</div>) }
                         </div>
                       </div>
                       <div className="row form-group">
@@ -357,11 +370,13 @@ PetRegister.propTypes = {
   setSelectedPet: PropTypes.func,
 	auth: PropTypes.object.isRequired,
   pets: PropTypes.object,
+  errors: PropTypes.object
 }
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
-    pets: state.pets
+    pets: state.pets,
+    errors: state.errors
 })
 
 export  default connect(mapStateToProps, { setSelectedPet, registerPetChat })(PetRegister)

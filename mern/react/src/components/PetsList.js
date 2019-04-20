@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getAllPets, setSelectedPet, deleteSelectedPet } from '../actions/petprofile';
+import { getAllPets, setSelectedPet, deleteSelectedPet, registerPetChat } from '../actions/petprofile';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrash, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import Swal from 'sweetalert2'
@@ -26,7 +26,14 @@ class PetsList extends Component {
 			this.props.getAllPets(this.props.auth.user.id, this.props.history);
 		}
 		this.ChatVet = this.ChatVet.bind(this);
+		this.ChatVetDirectly = this.ChatVetDirectly.bind(this);
 		this.deletePet = this.deletePet.bind(this);
+	}
+	ChatVetDirectly(petId) {
+		var form = new FormData();
+		form.append("chat_direct", true)
+		form.append("pet", petId)
+		this.props.registerPetChat(form, this.props.history)
 	}
 
 	ChatVet(pet) {
@@ -60,7 +67,6 @@ class PetsList extends Component {
 	}
 	render() {
 		const { pets } = this.props
-		console.log(pets)
 		var Found = false
 		function PetsList(props) {
 			const list = props.petsList;
@@ -83,7 +89,8 @@ class PetsList extends Component {
 								<button onClick={ () => props.onDelete(pet) } className="pet-icons pet-delete"><FontAwesomeIcon icon={ faTrash } /></button>
 							</div>
 							<div className="col-md-3 actions-block text-right">
-								<button onClick={ () => props.onChat(pet) } className="btn btn-primary btn-md">Chat With Vet</button>
+								<button onClick={ () => props.onChat(pet) } className="btn login-btn-primary btn-md">Add Case History</button>
+								<button onClick={ () => props.onChatDirectly(pet._id) } className="btn login-btn-primary btn-md mt-2">Chat With Vet</button>
 								{ pet._chat && pet._chat.length > 0 && pet._chat.map((chat, index) => {
 										if(chat.notes && chat.notes.length > 0) {
 											Found = true
@@ -91,7 +98,7 @@ class PetsList extends Component {
 								})
 								}
 								{ Found === true && 
-									<button key={ index } onClick={ () => props.viewNotes(pet) } className="btn btn-success mt-1">View Case Notes</button>
+									<button key={ index } onClick={ () => props.viewNotes(pet) } className="btn btn-warning mt-1">View Case Notes</button>
 								}
 								{ Found = false}
 							</div>
@@ -115,7 +122,7 @@ class PetsList extends Component {
 							<label>Pets List</label>
 							<div>
 								<Link to="/dashboard"><FontAwesomeIcon icon={ faArrowLeft }/> Back to Dashboard</Link>
-								<Link to="/createprofile" className="btn btn-primary ml-2">Add New Pet</Link>
+								<Link to="/createprofile" className="btn login-btn-primary ml-2">Add New Pet</Link>
 							</div>
 						</div>
 						<div className="card-body">
@@ -124,6 +131,7 @@ class PetsList extends Component {
 									<PetsList
 										onDelete={ this.deletePet.bind(this) }
 										onChat={ this.ChatVet.bind(this) }
+										onChatDirectly={ this.ChatVetDirectly.bind(this) }
 										petsList={ pets.petsList }
 										viewNotes= { this.viewNotes.bind(this) }
 									/>
@@ -149,4 +157,4 @@ const mapStateToProps = (state) => ({
     pets: state.pets,
 })
 
-export  default connect(mapStateToProps, { getAllPets, setSelectedPet, deleteSelectedPet })(PetsList)
+export  default connect(mapStateToProps, { getAllPets, setSelectedPet, deleteSelectedPet, registerPetChat })(PetsList)
