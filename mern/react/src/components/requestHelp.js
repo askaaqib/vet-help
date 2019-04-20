@@ -55,6 +55,7 @@ class RequestHelp extends Component {
 		if(!this.props.auth.isAuthenticated) {
 			this.props.history.push('/login');
 		}
+		
 		// if(this.props.location && this.props.location.search !== undefined) {
 			// const values = queryString.parse(this.props.location.search)
 			// if(values.type === 'user') {
@@ -75,28 +76,28 @@ class RequestHelp extends Component {
 	componentWillReceiveProps(nextProps) {
 		if(nextProps) {
 			/* PROPS RECEIVED TO CUSTOMER FOR SESSION DETAILS */
-			if (this.state.userType === 'customer' && nextProps.requests.requestDetails) {
-				const details = nextProps.requests.requestDetails
-				if(details.status === 'accepted') {
-					this.setState({
-						loader: false
-					})
-				}
-			}
-			console.log('nextprops', nextProps)
+			// if (this.state.userType === 'customer' && nextProps.requests.requestDetails) {
+			// 	const details = nextProps.requests.requestDetails
+			// 	if(details.status === 'accepted') {
+			// 		this.setState({
+			// 			loader: false
+			// 		})
+			// 	}
+			// }
+			// console.log('nextprops', nextProps)
 		}
 	}
 
 	connectedCall() {
-		// Pusher.logToConsole = true;
-		this.pusherTwo = new Pusher(APP_KEY, {
-			cluster: 'ap2'
-		});
-		this.channelTwo = this.pusherTwo.subscribe('chats-changes');
-		console.log('this channeltwo', this.channelTwo)
-		this.channelTwo.bind('inserted', (chat) => {
-			console.log('binding update', chat)
-		});
+		// // Pusher.logToConsole = true;
+		// this.pusherTwo = new Pusher(APP_KEY, {
+		// 	cluster: 'ap2'
+		// });
+		// this.channelTwo = this.pusherTwo.subscribe('chats-changes');
+		// console.log('this channeltwo', this.channelTwo)
+		// this.channelTwo.bind('inserted', (chat) => {
+		// 	console.log('binding update', chat)
+		// });
 	}
 
 	setupPusher() {
@@ -165,7 +166,6 @@ class RequestHelp extends Component {
 	}
 
 	callTo(userId) {
-		console.log('call to called', this.user.id, userId)
 		this.peers[userId] = this.startPeer(userId);
 	}
 

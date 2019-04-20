@@ -32,7 +32,7 @@ class RequestList extends Component {
     form.append('status', 'accepted');
     form.append('id', req_id);
     this.props.getRequestDetails(req_id)
-    this.props.updateRequestStatus(form)
+    this.props.updateRequestStatus(form, user_id)
     this.props.getAllRequests()
     // console.log(id, 'hi')
   }

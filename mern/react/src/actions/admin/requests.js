@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_ERRORS, GET_ALL_REQUESTS, TOTAL_PAGES, GET_REQUEST_DETAILS } from '../types';
+import { GET_ERRORS, GET_ALL_REQUESTS, TOTAL_PAGES, GET_REQUEST_DETAILS, ACCEPTED_CALL_ADMIN } from '../types';
 
 export const getAllRequests = () => dispatch => {
   axios.get('/api/getAllrequests')
@@ -26,8 +26,13 @@ export const uploadNotes = (data) => dispatch => {
 }
 
 /************ UPDATE REQUEST METHOD ************/
-export const updateRequestStatus = (data) => dispatch => {
+export const updateRequestStatus = (data, user_id) => dispatch => {
   axios.post('api/updateRequestStatus', data).then(res => {
+    dispatch({
+      type: ACCEPTED_CALL_ADMIN,
+      userId: user_id,
+      request: res
+    })
     // console.log(this.state)
   })
 }

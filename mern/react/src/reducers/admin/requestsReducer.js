@@ -1,11 +1,12 @@
-import { GET_ALL_REQUESTS, TOTAL_PAGES, REQUEST_HELP_PENDING, GET_REQUEST_DETAILS } from '../../actions/types';
+import { GET_ALL_REQUESTS, TOTAL_PAGES, REQUEST_HELP_PENDING, GET_REQUEST_DETAILS, ACCEPTED_CALL_ADMIN } from '../../actions/types';
 // import isEmpty from '../../is-empty';
 
 const initialState = {
   requestList: [],
   pendingRequestList: [],
   totalpage: null,
-  requestDetails: null
+  requestDetails: null,
+  userOnCall: null
 }
 
 export default function (state= initialState, action) {
@@ -29,6 +30,11 @@ export default function (state= initialState, action) {
       return {
         ...state,
         totalpage: action.payload
+      }
+    case ACCEPTED_CALL_ADMIN:
+      return {
+        ...state,
+        userOnCall: action.userId
       }
     default:
       return state;
