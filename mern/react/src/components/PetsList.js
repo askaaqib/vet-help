@@ -6,15 +6,18 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAllPets, setSelectedPet, deleteSelectedPet, registerPetChat } from '../actions/petprofile';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen, faTrash, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faPen, faTrash, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import Swal from 'sweetalert2'
+import Pagination from "react-js-pagination";
 
 class PetsList extends Component {
 
 	constructor() {
 		super();
 		this.state = {
-			selectedPet: ''
+			selectedPet: '',
+			activePage: null,
+			totalItemsCount: null
 		}
 		
 	}
@@ -23,12 +26,34 @@ class PetsList extends Component {
 		if(!this.props.auth.isAuthenticated) {
 			this.props.history.push('/login');
 		} else {
-			this.props.getAllPets(this.props.auth.user.id, this.props.history);
+			this.props.getAllPets(this.props.auth.user.id, 1, this.props.history);
 		}
 		this.ChatVet = this.ChatVet.bind(this);
 		this.ChatVetDirectly = this.ChatVetDirectly.bind(this);
 		this.deletePet = this.deletePet.bind(this);
+		this.handlePageChange = this.handlePageChange.bind(this);
+		if(this.props.history) {
+			this.props.history.push('/dashboard')
+		}
 	}
+	
+	componentWillReceiveProps(props) {
+		if (props) {
+			console.log('nextprops', props)
+			var currentPage = props.pets.petsList.current
+			var totalPages = props.pets.petsList.pages
+			if (currentPage && totalPages) {
+				this.setState({
+					activePage: currentPage,
+					totalItemsCount: totalPages
+				})
+			}
+		}
+	}
+	handlePageChange(pageNumber) {
+		this.props.getAllPets(this.props.auth.user.id, pageNumber, this.props.history)
+	}
+	
 	ChatVetDirectly(petId) {
 		var form = new FormData();
 		form.append("chat_direct", true)
@@ -61,7 +86,7 @@ class PetsList extends Component {
 				form.append('image', pet.image);
 				this.props.deleteSelectedPet(form, this.props.history)
 				/********** GET PETS LIST **********/
-				this.props.getAllPets(this.props.auth.user.id, this.props.history)
+				this.props.getAllPets(this.props.auth.user.id, 1, this.props.history)
 			}
 		})
 	}
@@ -70,8 +95,9 @@ class PetsList extends Component {
 		var Found = false
 		function PetsList(props) {
 			const list = props.petsList;
-			if (list.length > 0) {
-				const listPets = list.map((pet, index) =>
+			if (list && list.pets && list.pets.length > 0) {
+				console.log('pets', list.pets)
+				const listPets = list.pets.map((pet, index) =>
 					<div key={index}>
 						<div className="row list-row">
 							<div className="col-md-2 img-block">
@@ -90,7 +116,7 @@ class PetsList extends Component {
 							</div>
 							<div className="col-md-3 actions-block text-right">
 								<button onClick={ () => props.onChat(pet) } className="btn login-btn-primary btn-md">Add Case History</button>
-								<button onClick={ () => props.onChatDirectly(pet._id) } className="btn login-btn-primary btn-md mt-2">Chat With Vet</button>
+								<button onClick={ () => props.onChatDirectly(pet._id) } className="btn login-btn-primary btn-md mt-2">Speak to a Vet Now!</button>
 								{ pet._chat && pet._chat.length > 0 && pet._chat.map((chat, index) => {
 										if(chat.notes && chat.notes.length > 0) {
 											Found = true
@@ -114,30 +140,33 @@ class PetsList extends Component {
 				)
 			}
 		}
+
 		return (
-			<div className="main-dasboard">
-				<div className="container mt-5">
-					<div className="card dash-main-card">
-						<div className="card-header petlist-head">
-							<label>Pets List</label>
-							<div>
-								<Link to="/dashboard"><FontAwesomeIcon icon={ faArrowLeft }/> Back to Dashboard</Link>
-								<Link to="/createprofile" className="btn login-btn-primary ml-2">Add New Pet</Link>
-							</div>
-						</div>
-						<div className="card-body">
-							<div className="container">
-								<div className="row">
-									<PetsList
-										onDelete={ this.deletePet.bind(this) }
-										onChat={ this.ChatVet.bind(this) }
-										onChatDirectly={ this.ChatVetDirectly.bind(this) }
-										petsList={ pets.petsList }
-										viewNotes= { this.viewNotes.bind(this) }
-									/>
-								</div>
-							</div>
-						</div>
+			<div className="container">
+				<div className="row">
+					<PetsList
+						onDelete={ this.deletePet.bind(this) }
+						onChat={ this.ChatVet.bind(this) }
+						onChatDirectly={ this.ChatVetDirectly.bind(this) }
+						petsList={ pets.petsList }
+						viewNotes= { this.viewNotes.bind(this) }
+					/>
+					<Pagination
+						activePage={ this.state.activePage }
+						itemsCountPerPage={ 1 }
+						totalItemsCount={ this.state.totalItemsCount }
+						pageRangeDisplayed={5}
+						prevPageText="Previous"
+						nextPageText="Next"
+						onChange={ this.handlePageChange }
+						innerClass="pagination"
+						itemClass="page-item"
+						linkClass="page-link"
+					/>
+					<div className="add-new-pet">
+						<Link to="/createprofile">
+							<FontAwesomeIcon className="addicon" icon= { faPlusCircle }/> <span>Add New Pet</span>
+						</Link>
 					</div>
 				</div>
 			</div>

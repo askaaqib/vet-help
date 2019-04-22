@@ -80,7 +80,9 @@ body {
 .App-link {
   color: #61dafb;
 }
-
+.home-link {
+  font-size: 24px;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -92,7 +94,10 @@ body {
 
 
 .logo-width {
-  width: 60px;
+  width: 230px;
+  background: white;
+  padding: 12px;
+  /* width: 210px; */
 }
 
 .header-bg {
@@ -392,4 +397,19 @@ ul.pets-list {
 }
 .ck-editor__editable_inline {
   height: 400px;
+}
+.pet-photo-instruction {
+  font-size: 90%;
+}
+.add-new-pet {
+  padding: 20px;
+}
+.add-new-pet .addicon {
+  font-size: 34px;
+  color: #e91e63;
+}
+.add-new-pet span {
+  font-size: 20px;
+  line-height: 34px;
+  vertical-align: top;
 }

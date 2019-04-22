@@ -57,10 +57,11 @@ export const registerPetChat = (pet, history) => dispatch => {
 }
 
 /********* GET ALL PETS METHOD *********/
-export const getAllPets = (userId, history) => dispatch => {
+export const getAllPets = (userId, page, history) => dispatch => {
 	axios.get('/api/pets', {
 		params: {
-			user_id: userId
+			user_id: userId,
+			page: page
 		}
 	}).then(res => {
 		dispatch(setPetsList(res.data))

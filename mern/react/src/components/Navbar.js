@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../actions/authentication';
 import { withRouter } from 'react-router-dom'
 import logo from '../img/vetpal-logo.png'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome } from '@fortawesome/free-solid-svg-icons'
 
 class Navbar extends Component {
     onLogout(e) {
@@ -20,8 +22,10 @@ class Navbar extends Component {
 
         const authLinks = (
             <ul className="navbar ml-auto">
-                <Link style={{ color: "#fff" }} to="/dashboard" className="nav-link">Dashboard</Link>
-                <Link style={{ color: "#fff" }} to="/createprofile" className="nav-link">Create Profile</Link>
+                <Link style={{ color: "#fff" }} to="/dashboard" className="home-link nav-link">
+                    <FontAwesomeIcon icon={ faHome } />
+                </Link>
+                {/* <Link style={{ color: "#fff" }} to="/createprofile" className="nav-link">Create Profile</Link> */}
                 {/* <Link style={{ color: "#fff" }} to="/requesthelp" className="nav-link">Request Help</Link> */}
                 <Link style={{ color: "#fff" }} to="#" className="nav-link" onClick={this.onLogout.bind(this)}>
                 {user.name }
@@ -57,7 +61,7 @@ class Navbar extends Component {
         return(
             <nav className="navbar navbar-expand-lg nav-light-bg header-bg">
                 <Link className="navbar-brand" to="/">
-                { console.log(logo)}
+                {/* { console.log(logo)} */}
                     <img src={ logo } alt="Vet Pal" className="logo-width" />
                 </Link>
                 <div className="callapse navbar-collapse" id="navbarSupportedContent">

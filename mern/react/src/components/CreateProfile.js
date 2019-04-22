@@ -72,7 +72,7 @@ class CreateProfile extends Component {
 					<div className="card dash-main-card">
 						<div className="card-header petlist-head">
 							<label>Create Pet Profile</label>
-							<Link to="/pets"><FontAwesomeIcon icon={ faArrowLeft }/> Back to Pets List</Link>
+							<Link to="/dashboard"><FontAwesomeIcon icon={ faArrowLeft }/> Back to Pets List</Link>
 						</div>
 						<div className="card-body">
 							<div className="container">
@@ -93,17 +93,15 @@ class CreateProfile extends Component {
 												{ errors.name && (<div className="invalid-feedback">{errors.name}</div>) }
 											</div>
 											<div className="form-group col-md-6">
-												<label>Pet Type</label>
-													<select
+												<label>Pet Type (Dog, cat etc.)</label>
+													<input
 														id="type"
-														defaultValue="0"
+														defaultValue={ this.state.type}
+														placeholder="(Dog, cat etc.)"
 														name="type"
 														onChange={ this.handleInputChange }
 														className={ classnames('form-control', {'is-invalid': errors.type})}
-													>
-														<option value="0">Pet Type</option>
-														<option value="dog">Dog</option>
-													</select>
+													/>
 													{ errors.type && (<div className="invalid-feedback">{errors.type}</div>) }
 											</div>
 											<div className="form-group col-md-6">
@@ -139,6 +137,7 @@ class CreateProfile extends Component {
 													id="image"
 													onChange={ this.handleInputChange } 
 												/>
+												<p className="pet-photo-instruction">Upload pet photo (optional)</p>
 											</div>
 											{/* <Link to="/dashboard" className="btn btn-primary mr-2">Back</Link> */}
 											<button onClick={ this.addProfile }className="btn login-btn-primary">Submit</button>

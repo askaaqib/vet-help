@@ -121,9 +121,24 @@ export const deletePet = async (req, res) => {
 /******************* SHOW ALL PETS METHOD *******************/
 export const allPets = async (req, res) => {
 		var userId = req.query.user_id
-		Pet.find({ _user: userId }).populate('_chat').exec(function (err, pet) {
-			if (err) return handleError(err);
-			res.json(pet)
+		var perPage = 5
+    var page = req.query.page || 1
+		Pet
+			.find({ _user: userId })
+			.skip((perPage * page) - perPage)
+			.limit(perPage)
+			.populate('_chat')
+			.exec(function (err, pet) {
+				Pet.find({ _user: userId }).count().exec(function(err, count){
+					if (err) return handleError(err);
+					res.json({
+						pets: pet,
+						current: page,
+						pages: Math.ceil(count / perPage),
+						count: count
+					})
+					// res.json(pet)
+				})
 		})
 		// return res.json({"something": 'seomthig'});
 }
