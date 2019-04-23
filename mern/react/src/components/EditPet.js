@@ -110,17 +110,15 @@ class CreateProfile extends Component {
 												{ errors.name && (<div className="invalid-feedback">{errors.name}</div>) }
 											</div>
 											<div className="form-group">
-												<label>Pet Type</label>
-													<select
+												<label>Pet Type (Dog, cat, etc.)</label>
+													<input
 														id="type"
-														defaultValue="0"
-                            name="type"
+														type="text"
+														name="type"
+														defaultValue={ this.state.type }
 														onChange={ this.handleInputChange }
 														className={ classnames('form-control', {'is-invalid': errors.type})}
-													>
-														<option value="">Pet Type</option>
-														<option value="dog">Dog</option>
-													</select>
+													/>
 													{ errors.type && (<div className="invalid-feedback">{errors.type}</div>) }
 											</div>
 											<div className="form-group">

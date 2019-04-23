@@ -43,11 +43,11 @@ class UserList extends Component {
   }
   
   editUser(id) {
-    // console.log(id, 'hi')
+    console.log(id, 'edit')
   }
 
   deleteUser(id) {
-    // console.log(id, 'hiiii')
+    console.log(id, 'delete')
   }
   
   render() { 
@@ -56,10 +56,16 @@ class UserList extends Component {
     function UserList(props){
       const users  = props.users.users
       console.log('users', users)
-      if (users && users.length > 0 ) {
+      if (users && users.length > 0) {
         const listUsers = users.map((user,index) => {
           return (
-            <UserListElement index={ index } key={ index } user={ user }/>
+            <UserListElement
+              editUser={() => this.props.editUser } 
+              deleteUser={() => this.props.deleteUser }
+              index={ index }
+              key={ index }
+              user={ user }
+            />
           )
         });
         return (
@@ -69,8 +75,7 @@ class UserList extends Component {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Role</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -88,13 +93,12 @@ class UserList extends Component {
                   <th>Name</th>
                   <th>Email</th>
                   <th>Role</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
               <tr>
-                <td className="text-center" colspan="5">No User Found</td>
+                <td className="text-center" colSpan="5">No User Found</td>
               </tr>  
               </tbody>
             </table>
@@ -110,7 +114,11 @@ class UserList extends Component {
               <h1 className="mt-4">User List</h1>
                <div className="">
                 <div className=" mt-5">
-                <UserList users={ users.userList }/>
+                <UserList
+                  users={ users.userList }
+                  deleteUser={ this.deleteUser }
+                  editUser={ this.editUser }
+                />
                 <Pagination
                   activePage={ this.state.activePage }
                   itemsCountPerPage={ 1 }

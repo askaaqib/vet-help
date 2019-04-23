@@ -62,7 +62,7 @@ export const updatePet = async (req, res)  => {
 	if(!isValid) {
 		return res.status(400).json(errors);
 	}
-	
+	console.log(req.body)
 	const toUpdate = {
 		_id: req.body.id,
 		name: req.body.name,
