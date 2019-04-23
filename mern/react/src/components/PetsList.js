@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrash, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import Swal from 'sweetalert2'
 import Pagination from "react-js-pagination";
+import { withRouter } from 'react-router'
 
 class PetsList extends Component {
 
@@ -186,4 +187,4 @@ const mapStateToProps = (state) => ({
     pets: state.pets,
 })
 
-export  default connect(mapStateToProps, { getAllPets, setSelectedPet, deleteSelectedPet, registerPetChat })(PetsList)
+export  default withRouter(connect(mapStateToProps, { getAllPets, setSelectedPet, deleteSelectedPet, registerPetChat })(PetsList))
