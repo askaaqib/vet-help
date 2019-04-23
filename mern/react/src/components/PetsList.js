@@ -40,7 +40,6 @@ class PetsList extends Component {
 	
 	componentWillReceiveProps(props) {
 		if (props) {
-			console.log('nextprops', props)
 			var currentPage = props.pets.petsList.current
 			var totalPages = props.pets.petsList.pages
 			if (currentPage && totalPages) {
@@ -51,6 +50,7 @@ class PetsList extends Component {
 			}
 		}
 	}
+
 	handlePageChange(pageNumber) {
 		this.props.getAllPets(this.props.auth.user.id, pageNumber, this.props.history)
 	}
@@ -109,15 +109,15 @@ class PetsList extends Component {
 								)}
 							</div>
 							<div className="col-md-7 desc-block">
-								<div className="pet-name"><b>Name: </b>{ pet.name }</div>
-								<div className="pet-breed"><b>Breed: </b> { pet.breed }</div>
-								<div className="pet-age"><b>Age: </b> { pet.age }</div>
+								<div className="pet-name">{ pet.name }</div>
+								<div className="pet-breed">{ pet.breed }</div>
+								{/* <div className="pet-age"><b>Age: </b> { pet.age }</div> */}
 								<Link to={'/pet/' + pet._id + '/edit'} className="pet-icons pet-edit"><FontAwesomeIcon icon={ faPen } /></Link>
 								<button onClick={ () => props.onDelete(pet) } className="pet-icons pet-delete"><FontAwesomeIcon icon={ faTrash } /></button>
 							</div>
 							<div className="col-md-3 actions-block text-right">
-								<button onClick={ () => props.onChat(pet) } className="btn login-btn-primary btn-md">Add Case History</button>
-								<button onClick={ () => props.onChatDirectly(pet._id) } className="btn login-btn-primary btn-md mt-2">Speak to a Vet Now!</button>
+								<button onClick={ () => props.onChat(pet) } className="btn login-btn-primary btn-md mb-2">Add Case History</button>
+								<button onClick={ () => props.onChatDirectly(pet._id) } className="btn login-btn-primary btn-md mb-2 ml-3">Speak to a Vet Now!</button>
 								{ pet._chat && pet._chat.length > 0 && pet._chat.map((chat, index) => {
 										if(chat.notes && chat.notes.length > 0) {
 											Found = true
@@ -152,23 +152,30 @@ class PetsList extends Component {
 						petsList={ pets.petsList }
 						viewNotes= { this.viewNotes.bind(this) }
 					/>
-					<Pagination
-						activePage={ this.state.activePage }
-						itemsCountPerPage={ 1 }
-						totalItemsCount={ this.state.totalItemsCount }
-						pageRangeDisplayed={5}
-						prevPageText="Previous"
-						nextPageText="Next"
-						onChange={ this.handlePageChange }
-						innerClass="pagination"
-						itemClass="page-item"
-						linkClass="page-link"
-					/>
-					<div className="add-new-pet">
-						<Link to="/createprofile">
-							<FontAwesomeIcon className="addicon" icon= { faPlusCircle }/> <span>Add New Pet</span>
-						</Link>
+					<div className="row">
+						<div className="col-md-12">
+							<Pagination
+								activePage={ this.state.activePage }
+								itemsCountPerPage={ 1 }
+								totalItemsCount={ this.state.totalItemsCount }
+								pageRangeDisplayed={5}
+								prevPageText="Previous"
+								nextPageText="Next"
+								onChange={ this.handlePageChange }
+								innerClass="pagination"
+								itemClass="page-item"
+								linkClass="page-link"
+							/>
+						</div>
+						<div className="col-md-12">
+							<div className="add-new-pet">
+								<Link to="/createprofile">
+									<FontAwesomeIcon className="addicon" icon= { faPlusCircle }/> <span>Add New Pet</span>
+								</Link>
+							</div>
+						</div>
 					</div>
+					
 				</div>
 			</div>
 		);

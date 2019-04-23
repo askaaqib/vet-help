@@ -60,7 +60,7 @@ class Navbar extends Component {
           )
         return(
             <nav className="navbar navbar-expand-lg nav-light-bg header-bg">
-                <Link className="navbar-brand" to="/">
+                <Link className="navbar-brand" to="/dashboard">
                 {/* { console.log(logo)} */}
                     <img src={ logo } alt="Vet Pal" className="logo-width" />
                 </Link>

@@ -48,7 +48,7 @@ class RequestList extends Component {
   render() { 
     console.log(this.props)
     const  { requestList, totalpage, requestDetails } = this.props.requests;
-    const { showChatDialog } = this.state
+    // const { showChatDialog } = this.state
     return ( 
       <div>
         <div className="d-flex" id="wrapper">

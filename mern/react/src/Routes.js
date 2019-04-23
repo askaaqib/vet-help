@@ -22,8 +22,6 @@ import UserLIst from './components/admin/users/UsersList';
 import RequestLIst from './components/admin/requests/RequestsList';
 import EditPet from './components/EditPet';
 import PetNotes from './components/PetNotes';
-import Pusher from 'pusher-js';
-const APP_KEY = '92e8a4cbd51aaee54132';
 
 if(localStorage.jwtToken) {
     setAuthToken(localStorage.jwtToken);
@@ -45,6 +43,7 @@ class Routes extends Component {
         <Router>
           <div>
             <Navbar />
+            <Route exact path="/" component={ Home } />
             <Route exact path="/dashboard" component={ Home } />
             <Route exact path="/requestlist" component={ RequestLIst } />
             <Route exact path="/userlist" component={ UserLIst } />

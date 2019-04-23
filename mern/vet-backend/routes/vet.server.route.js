@@ -3,7 +3,7 @@ import express from 'express';
 //import controller file
 import passport from 'passport';
 // import * as todoController from '../controllers/vet.server.controller';
-import * as UserController from '../controllers/user';
+import * as UserController from '../controllers/userController';
 import * as RequestController from '../controllers/requestController';
 import * as PetController from '../controllers/petController';
 // get an instance of express router

@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import MediaHandler from './MediaHandler';
 import Pusher from 'pusher-js';
 import Peer from 'simple-peer';
-import queryString from 'query-string'
-import Spinner from 'react-bootstrap/Spinner'
+// import queryString from 'query-string'
+// import Spinner from 'react-bootstrap/Spinner'
 import { getRequestDetails } from '../actions/admin/requests'
 
 const APP_KEY = '92e8a4cbd51aaee54132';

@@ -160,43 +160,23 @@ export const me = (req, res) => {
 }
 
 export const getAllUsers = (req, res) => {
-    pageNo = parseInt(req.query.pageNo) ? parseInt(req.query.pageNo) : pageNo
-    size = parseInt(req.query.size) ? parseInt(req.query.size) : size
-    query = {}
-    response = {}
-    // User.find()
-    // .then(user => {
-    //     if(!user) {
-    //         errors.email = 'User not found'
-    //         return res.status(404).json(errors);
-    //     }
-
-    //     return res.json(user)
-    // });
-
-    
-    if(pageNo < 0 || pageNo === 0) {
-          response = {"error" : true,"message" : "invalid page number, should start with 1"};
-          return res.json(response)
-    }
-    query.skip = size * (pageNo - 1)
-    query.limit = size
-    // Find some documents
-         User.count({},function(err,totalCount) {
-               if(err) {
-                 response = {"error" : true, "message" : "Error fetching data"}
-               }
-           User.find({},{},query,function(err,data) {
-                // Mongo command to fetch all data from collection.
-              if(err) {
-                  response = {"error" : true, "message" : "Error fetching data"};
-              } else {
-                  var totalPages = Math.ceil(totalCount / size)
-                  response = {"error" : false, "message" : data,"pages": totalPages};
-              }
-              res.json(response);
-           });
-         })
+	var perPage = 15
+	var page = req.query.page || 1
+	User
+		.find()
+		.skip((perPage * page) - perPage)
+		.limit(perPage)
+		.exec(function (err, user) {
+			User.find().count().exec(function(err, count){
+				if (err) return handleError(err);
+				res.json({
+					users: user,
+					current: page,
+					pages: Math.ceil(count / perPage),
+					count: count
+				})
+			})
+		})
 }
 
 // router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) => {
