@@ -26,7 +26,7 @@ class Navbar extends Component {
 				</Link>
 				{/* <Link style={{ color: "#fff" }} to="/createprofile" className="nav-link">Create Profile</Link> */}
 				{/* <Link style={{ color: "#fff" }} to="/requesthelp" className="nav-link">Request Help</Link> */}
-				{user.name }
+				<span className="user-name">{user.name}</span>
 				<img
 					src={user.avatar}
 					alt={user.name}
@@ -42,7 +42,7 @@ class Navbar extends Component {
 		const adminLinks = (
 			<ul className="navbar ml-auto">
 				<Link style={{ color: "#fff" }} to="/dashboard" className="nav-link">Dashboard</Link>
-				{user.name}
+				<span className="user-name">{user.name}</span>
 				<img
 					src={user.avatar} alt={user.name} title={user.name}
 					className="rounded-circle"
@@ -66,7 +66,6 @@ class Navbar extends Component {
 		return(
 			<nav className="navbar navbar-expand-lg nav-light-bg header-bg">
 				<Link className="navbar-brand" to="/dashboard">
-				{/* { console.log(logo)} */}
 					<img src={ logo } alt="Vet Pal" className="logo-width" />
 				</Link>
 				<div className="callapse navbar-collapse" id="navbarSupportedContent">

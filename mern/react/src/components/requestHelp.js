@@ -67,10 +67,8 @@ class RequestHelp extends Component {
 			/* GET CHAT/SESSION STATUS */
 			// this.props.getRequestDetails(values.session)
 			// this.connectedCall()
-			// console.log(values.type, values.session)
 		// }
 		// this.user = this.props.auth.user
-		// console.log(this.props.auth.user.id, this.user)
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -84,7 +82,6 @@ class RequestHelp extends Component {
 			// 		})
 			// 	}
 			// }
-			// console.log('nextprops', nextProps)
 		}
 	}
 
@@ -94,9 +91,7 @@ class RequestHelp extends Component {
 		// 	cluster: 'ap2'
 		// });
 		// this.channelTwo = this.pusherTwo.subscribe('chats-changes');
-		// console.log('this channeltwo', this.channelTwo)
 		// this.channelTwo.bind('inserted', (chat) => {
-		// 	console.log('binding update', chat)
 		// });
 	}
 
@@ -112,13 +107,11 @@ class RequestHelp extends Component {
 				}
 			}
 		});
-		// console.log('this pusher', this.pusher)
 		this.channel = this.pusher.subscribe('presence-video-channel');
 		this.channel.bind(`client-signal-${this.user.id}`, (signal) => {
 			let peer = this.peers[signal.userId];
 			// if peer is not already exists, we got an incoming call
 			if(peer === undefined) {
-				// console.log('coming in')
 				this.setState({otherUserId: signal.userId});
 				peer = this.startPeer(signal.userId, false);
 			}
@@ -134,7 +127,6 @@ class RequestHelp extends Component {
 		});
 			
 		peer.on('signal', (data) => {
-			console.log('data pusher', data)
 			this.channel.trigger(`client-signal-${userId}`, {
 				type: 'signal',
 				userId: this.user.id,
@@ -149,7 +141,6 @@ class RequestHelp extends Component {
 				this.userVideo.src = URL.createObjectURL(stream);
 			}
 
-			// console.log(this.userVideo, 'hiiiiiiiiiiii')
 			this.userVideo.play();
 		});
 
@@ -180,8 +171,6 @@ class RequestHelp extends Component {
 	render() { 
 		// const { loader } = this.state
 		// const { userType } = this.state
-		//    console.log(this.user, parseInt(this.user.id))
-		console.log(this.props)
 		return ( 
 			<div className="main-dasboard">
 				<div className="container mt-5">

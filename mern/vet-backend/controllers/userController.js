@@ -7,6 +7,8 @@ const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
 const validateUserUpdateInput = require('../validation/userupdate');
 const User = require('../models/User')
+const Pet = require('../models/Pet')
+const Chat = require('../models/Chat')
 const Pusher = require('pusher');
 
 var pageNo = 1
@@ -236,6 +238,20 @@ export const userById = async (req, res) => {
 /******************* DELETE USER METHOD *******************/
 export const deleteUser = async (req, res) => {
 	var userId = req.body.id
+	User.findById(userId, function (err, user) {
+		Pet.find({ _user: userId}).then(pet => {
+			pet.map(data => {
+				var petId = data._id
+				Pet.findById(petId, function (err, pet2) {
+					// GET CHATS DATA AND REMOVE CHATS RELATED TO PET
+					var chats = pet2._chat
+					Chat.deleteMany({ _id: { $in: chats}}, (err, chats) => {})
+					// REMOVE PET
+					pet2.remove()
+				})
+			})
+		})
+	})
 	User.remove({ _id: userId}).then(user => {
 		res.json(user)
 	})

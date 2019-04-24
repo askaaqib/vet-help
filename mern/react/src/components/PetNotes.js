@@ -47,7 +47,6 @@ class PetNotes extends Component {
 		this.props.history.push('/pets/notes/' + petId)
 	}
 	render() {
-		console.log(this.props)
 		const { petNotes } = this.props.pets
 		const showDetailNotes = this.state.showDetailNotes
 		const detailNotes = this.state.detailNotes

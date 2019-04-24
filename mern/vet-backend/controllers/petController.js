@@ -62,7 +62,6 @@ export const updatePet = async (req, res)  => {
 	if(!isValid) {
 		return res.status(400).json(errors);
 	}
-	console.log(req.body)
 	const toUpdate = {
 		_id: req.body.id,
 		name: req.body.name,
@@ -110,12 +109,24 @@ export const petById = async (req, res) => {
 export const deletePet = async (req, res) => {
 	var petId = req.body.id
 	var petImage = req.body.image
-	Pet.remove({ _id: petId}).then(pet => {
-		if (petImage) {
-			fs.unlinkSync('../react/public/images/pets/' + petImage)
-		}
-		res.json(pet)
+	Pet.findById(petId, function (err, pet) {
+		// GET CHATS DATA AND REMOVE CHATS RELATED TO PET
+		var chats = pet._chat
+		Chat.deleteMany({ _id: { $in: chats}}, (err, chats) => {})
+		// REMOVE PET
+		pet.remove().then(pet => {
+			if (petImage) {
+				fs.unlinkSync('../react/public/images/pets/' + petImage)
+			}
+			res.json(pet)
+		})
 	})
+	// Pet.remove({ _id: petId}).then(pet => {
+	// 	if (petImage) {
+	// 		fs.unlinkSync('../react/public/images/pets/' + petImage)
+	// 	}
+	// 	res.json(pet)
+	// })
 }
 
 /******************* SHOW ALL PETS METHOD *******************/

@@ -44,19 +44,13 @@ class CaseNotes extends Component {
                 data="<p></p>"
                 onInit={ editor => {
                     // You can store the "editor" and use when it is needed.
-                    console.log( 'Editor is ready to use!', editor );
                 } }
                 onChange={ ( event, editor ) => {
                     const data = editor.getData();
-                    console.log( { event, editor, data } );
                     this.handleInputChange(data)
                 } }
-                onBlur={ editor => {
-                    console.log( 'Blur.', editor );
-                } }
-                onFocus={ editor => {
-                    console.log( 'Focus.', editor );
-                } }
+                onBlur={ editor => {} }
+                onFocus={ editor => {} }
               />
               {/* <textarea
                 rows="16"

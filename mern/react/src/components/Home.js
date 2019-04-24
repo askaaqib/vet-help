@@ -17,9 +17,6 @@ class Home extends Component {
 	}
     
 	render() {
-		console.log(this.props, this.props.auth.user.role === 'user')
-
-
 		return (
 		<div>
 			{ this.props.auth.user.role === 'user' ?	<UserHome /> : <AdminHome />	}

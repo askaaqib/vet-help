@@ -33,7 +33,6 @@ class UserList extends Component {
 
   componentWillReceiveProps(props) {
 		if (props) {
-      console.log('nextprops', props)
 			var currentPage = props.users.userList.current
 			var totalPages = props.users.userList.pages
 			if (currentPage && totalPages) {
@@ -50,10 +49,9 @@ class UserList extends Component {
   }
 
   deleteUser(user) {
-    console.log(user, 'delete')
     Swal.fire({
 			title: 'Delete ' + user.name,
-			text: "You won't be able to revert this!",
+			text: "This will delete Pets, Notes of "+ user.name + ".You won't be able to revert this!",
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: '#3085d6',
@@ -71,11 +69,9 @@ class UserList extends Component {
   }
   
   render() { 
-    console.log(this.props)
     const { users } = this.props
     function UserList(props){
       const users  = props.users.users
-      console.log('users', users)
       if (users && users.length > 0) {
         const listUsers = users.map((user,index) => {
           return (
@@ -139,18 +135,20 @@ class UserList extends Component {
                   deleteUser={ this.deleteUser }
                   editUser={ this.editUser }
                 />
-                <Pagination
-                  activePage={ this.state.activePage }
-                  itemsCountPerPage={ 1 }
-                  totalItemsCount={ this.state.totalItemsCount }
-                  pageRangeDisplayed={5}
-                  prevPageText="Previous"
-                  nextPageText="Next"
-                  onChange={ this.handlePageChange }
-                  innerClass="pagination"
-                  itemClass="page-item"
-                  linkClass="page-link"
-                />
+      					{ users.userList.users && users.userList.users.length > 15 &&
+                  <Pagination
+                    activePage={ this.state.activePage }
+                    itemsCountPerPage={ 1 }
+                    totalItemsCount={ this.state.totalItemsCount }
+                    pageRangeDisplayed={5}
+                    prevPageText="Previous"
+                    nextPageText="Next"
+                    onChange={ this.handlePageChange }
+                    innerClass="pagination"
+                    itemClass="page-item"
+                    linkClass="page-link"
+                  />
+                }
                 </div>
               </div>
             </div>

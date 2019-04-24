@@ -8,13 +8,10 @@ class UserListElement extends Component {
     // this.deleteUser = this.deleteUser.bind(this)
   }
 
-  editUser(userId) {
-    console.log('edit', userId)
-  }
+  editUser(userId) {}
 
   render() { 
     const { index, user} = this.props
-    // console.log(this.props)
     return ( 
       <tr key={index}>
         <td>{user.name}</td>

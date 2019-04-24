@@ -65,7 +65,6 @@ class CreateProfile extends Component {
 				[e.target.name]: e.target.value
 			})	
 		}
-		// console.log(this.state, e.target.name, e.target.files)
 	}
 
 	addProfile(e) {

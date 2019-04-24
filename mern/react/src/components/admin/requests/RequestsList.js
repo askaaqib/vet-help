@@ -34,19 +34,13 @@ class RequestList extends Component {
     this.props.getRequestDetails(req_id)
     this.props.updateRequestStatus(form, user_id)
     this.props.getAllRequests()
-    // console.log(id, 'hi')
   }
 
-  declineRequest(id) {
-    // console.log(id, 'hiiii')
-  }
+  declineRequest(id) {}
   
-  componentWillReceiveProps(nextProps) {
-    // console.log(nextProps)
-  }
+  componentWillReceiveProps(nextProps) {}
 
   render() { 
-    console.log(this.props)
     const  { requestList, totalpage, requestDetails } = this.props.requests;
     // const { showChatDialog } = this.state
     return ( 

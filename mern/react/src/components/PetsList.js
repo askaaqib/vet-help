@@ -97,7 +97,6 @@ class PetsList extends Component {
 		function PetsList(props) {
 			const list = props.petsList;
 			if (list && list.pets && list.pets.length > 0) {
-				console.log('pets', list.pets)
 				const listPets = list.pets.map((pet, index) =>
 					<div key={index}>
 						<div className="row list-row">
@@ -152,30 +151,24 @@ class PetsList extends Component {
 						petsList={ pets.petsList }
 						viewNotes= { this.viewNotes.bind(this) }
 					/>
-					<div className="row">
-						<div className="col-md-12">
-							<Pagination
-								activePage={ this.state.activePage }
-								itemsCountPerPage={ 1 }
-								totalItemsCount={ this.state.totalItemsCount }
-								pageRangeDisplayed={5}
-								prevPageText="Previous"
-								nextPageText="Next"
-								onChange={ this.handlePageChange }
-								innerClass="pagination"
-								itemClass="page-item"
-								linkClass="page-link"
-							/>
-						</div>
-						{/* <div className="col-md-12">
-							<div className="add-new-pet">
-								<Link to="/createprofile">
-									<FontAwesomeIcon className="addicon" icon= { faPlusCircle }/> <span>Add New Pet</span>
-								</Link>
+					{ pets.petsList.pets && pets.petsList.pets.length > 5 &&
+							<div className="row">
+							<div className="col-md-12">
+								<Pagination
+									activePage={ this.state.activePage }
+									itemsCountPerPage={ 1 }
+									totalItemsCount={ this.state.totalItemsCount }
+									pageRangeDisplayed={5}
+									prevPageText="Previous"
+									nextPageText="Next"
+									onChange={ this.handlePageChange }
+									innerClass="pagination"
+									itemClass="page-item"
+									linkClass="page-link"
+								/>
 							</div>
-						</div> */}
-					</div>
-					
+						</div>
+					}
 				</div>
 			</div>
 		);

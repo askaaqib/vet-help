@@ -4,7 +4,6 @@ import { GET_ERRORS, GET_ALL_REQUESTS, TOTAL_PAGES, GET_REQUEST_DETAILS, ACCEPTE
 export const getAllRequests = () => dispatch => {
   axios.get('/api/getAllrequests')
     .then(res => {
-      // console.log(res.data)
       var  requestList = res.data.message;
       var totalpage = res.data.pages
         dispatch(setAllRequest(requestList));
@@ -20,9 +19,7 @@ export const getAllRequests = () => dispatch => {
 
 /************ UPLOAD NOTES METHOD ************/
 export const uploadNotes = (data) => dispatch => {
-  axios.post('api/uploadNotes', data).then(res => {
-    // console.log(this.state)
-  })
+  axios.post('api/uploadNotes', data).then(res => {})
 }
 
 /************ UPDATE REQUEST METHOD ************/
@@ -33,7 +30,6 @@ export const updateRequestStatus = (data, user_id) => dispatch => {
       userId: user_id,
       request: res
     })
-    // console.log(this.state)
   })
 }
 
@@ -48,7 +44,6 @@ export const getRequestDetails = (id) => dispatch => {
       type: GET_REQUEST_DETAILS,
       payload: res.data
     })
-    // console.log(res)
   })
 }
 
