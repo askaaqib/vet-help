@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PetsList from './PetsList'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 
 class  UserHome extends Component {
   constructor(props) {
@@ -13,7 +15,11 @@ class  UserHome extends Component {
       <div className="card dash-main-card">
         <div className="card-header petlist-head">
           <label>Dashboard</label>
-  		    <Link to="/createprofile" className="btn login-btn-primary ml-2">Add New Pet</Link>
+          <div className="add-new-pet">
+            <Link to="/createprofile">
+              <FontAwesomeIcon className="addicon" icon= { faPlusCircle }/> <span>Add New Pet</span>
+            </Link>
+          </div>
         </div>
         <div className="card-body">
           <div className="container">

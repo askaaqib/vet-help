@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAllPets, setSelectedPet, deleteSelectedPet, registerPetChat } from '../actions/petprofile';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen, faTrash, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
+import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Swal from 'sweetalert2'
 import Pagination from "react-js-pagination";
 import { withRouter } from 'react-router'
@@ -116,8 +116,8 @@ class PetsList extends Component {
 								<button onClick={ () => props.onDelete(pet) } className="pet-icons pet-delete"><FontAwesomeIcon icon={ faTrash } /></button>
 							</div>
 							<div className="col-md-3 actions-block text-right">
-								<button onClick={ () => props.onChat(pet) } className="btn login-btn-primary btn-md mb-2">Add Case History</button>
-								<button onClick={ () => props.onChatDirectly(pet._id) } className="btn login-btn-primary btn-md mb-2 ml-3">Speak to a Vet Now!</button>
+								{/* <button onClick={ () => props.onChat(pet) } className="btn login-btn-primary btn-md mb-2">View Case History</button> */}
+								<button onClick={ () => props.onChat(pet) } className="btn login-btn-primary btn-md mb-2 ml-3">Speak to a Vet Now!</button>
 								{ pet._chat && pet._chat.length > 0 && pet._chat.map((chat, index) => {
 										if(chat.notes && chat.notes.length > 0) {
 											Found = true
@@ -125,7 +125,7 @@ class PetsList extends Component {
 								})
 								}
 								{ Found === true && 
-									<button key={ index } onClick={ () => props.viewNotes(pet) } className="btn btn-warning mt-1">View Case Notes</button>
+									<button key={ index } onClick={ () => props.viewNotes(pet) } className="btn login-btn-primary mt-1">View Case History</button>
 								}
 								{ Found = false}
 							</div>
@@ -167,13 +167,13 @@ class PetsList extends Component {
 								linkClass="page-link"
 							/>
 						</div>
-						<div className="col-md-12">
+						{/* <div className="col-md-12">
 							<div className="add-new-pet">
 								<Link to="/createprofile">
 									<FontAwesomeIcon className="addicon" icon= { faPlusCircle }/> <span>Add New Pet</span>
 								</Link>
 							</div>
-						</div>
+						</div> */}
 					</div>
 					
 				</div>

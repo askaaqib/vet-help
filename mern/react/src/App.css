@@ -425,17 +425,23 @@ ul.pets-list {
   font-size: 90%;
 }
 .add-new-pet {
-  padding: 20px;
+  /* padding: 20px; */
 }
 .add-new-pet a {
   text-decoration: none !important;
 }
 .add-new-pet .addicon {
-  font-size: 34px;
+  font-size: 27px;
   color: #e91e63;
 }
 .add-new-pet span {
-  font-size: 20px;
-  line-height: 34px;
+  color: #e91e63;
+  font-size: 18px;
+  line-height: 27px;
   vertical-align: top;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }

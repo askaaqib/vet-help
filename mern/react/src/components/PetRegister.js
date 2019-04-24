@@ -235,7 +235,7 @@ class PetRegister extends Component {
                   <div className="card-body">
                     <div className="container">
                       <div className="row form-group">
-                        <h4>What's Wrong with { selectedPet.name } Today?</h4>
+                        <h4>What's wrong with { selectedPet.name } today?</h4>
                         <input
                           type="text"
 													className={ classnames('form-control', {'is-invalid': errors.problem})}

@@ -1,9 +1,10 @@
-import { GET_ALL_USERS, TOTAL_PAGES } from '../../actions/types';
+import { GET_ALL_USERS, TOTAL_PAGES, USER_EDIT_SHOW } from '../../actions/types';
 // import isEmpty from '../is-empty';
 
 const initialState = {
   userList: [],
   totalpage: null,
+  showUser: null
 }
 
 export default function (state= initialState, action) {
@@ -17,6 +18,11 @@ export default function (state= initialState, action) {
       return {
         ...state,
         totalpage: action.payload
+      }
+    case USER_EDIT_SHOW:
+      return {
+        ...state,
+        showUser: action.showUser
       }
     default:
       return state;

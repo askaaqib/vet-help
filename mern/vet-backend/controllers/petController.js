@@ -169,16 +169,16 @@ export const registerPetChat = async (req, res)  => {
 				})
 			})
 	} else {
-		try{
-			checkResponse = await validateChatRegisterInput(req.body);
-		}catch(error){
-			res.json({"error": error})
-		}
+		// try{
+		// 	checkResponse = await validateChatRegisterInput(req.body);
+		// }catch(error){
+		// 	res.json({"error": error})
+		// }
 		
-		const {errors, isValid} = checkResponse
-		if(!isValid) {
-			return res.status(400).json(errors);
-		}
+		// const {errors, isValid} = checkResponse
+		// if(!isValid) {
+		// 	return res.status(400).json(errors);
+		// }
 		// upload.single(image)
 	
 		if (req.body.images) {

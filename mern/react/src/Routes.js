@@ -19,6 +19,7 @@ import RequestHelp from './components/requestHelp';
 import PetsList from './components/PetsList';
 import PetRegister from './components/PetRegister';
 import UserLIst from './components/admin/users/UsersList';
+import EditUser from './components/admin/users/EditUser';
 import RequestLIst from './components/admin/requests/RequestsList';
 import EditPet from './components/EditPet';
 import PetNotes from './components/PetNotes';
@@ -47,6 +48,7 @@ class Routes extends Component {
             <Route exact path="/dashboard" component={ Home } />
             <Route exact path="/requestlist" component={ RequestLIst } />
             <Route exact path="/userlist" component={ UserLIst } />
+            <Route path="/user/:id/edit" component={ EditUser } />
             <Route exact path="/CreateProfile" component={ CreateProfile } />
             <Route exact path="/requesthelp" component={ RequestHelp } />
             <Route exact path="/pets" component={ PetsList } />

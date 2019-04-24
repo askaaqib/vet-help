@@ -35,6 +35,9 @@ router.route('/getAllrequests').get(RequestController.getAllRequests);
 router.route('/updateRequestStatus').post(RequestController.updateRequestStatus);
 router.route('/getRequestById').get(RequestController.getRequestById);
 router.route('/uploadNotes').post(RequestController.uploadNotes);
+router.route('/usershow').get(UserController.userById)
+router.route('/updateuser').post(UserController.updateUser);
+router.route('/deleteuser').post(UserController.deleteUser);
 /*********** ADMIN ROUTES ***********/
 
 router.route('/petshow').get(PetController.petById)

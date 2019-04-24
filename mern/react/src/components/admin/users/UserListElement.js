@@ -21,8 +21,8 @@ class UserListElement extends Component {
         <td>{user.email}</td>
         <td>{user.role}</td>
         <td>
-          {/* <button onClick={() => this.props.editUser(user._id)}>Edit</button> */}
-          {/* <button onClick={() => this.props.deleteUser(user._id)}>Delete</button> */}
+          <button onClick={() => this.props.editUser(user._id)}>Edit</button>
+          <button onClick={() => this.props.deleteUser(user)}>Delete</button>
         </td>
       </tr>
      );

@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SideBar from '../SideBar';
-import { getAllUsers } from '../../../actions/admin/userActions';
+import { getAllUsers, deleteSelectedUser } from '../../../actions/admin/userActions';
 import UserListElement from './UserListElement';
 import Pagination from "react-js-pagination";
 import { withRouter } from 'react-router'
+import Swal from 'sweetalert2'
 
 class UserList extends Component {
   constructor(props) {
@@ -15,6 +16,8 @@ class UserList extends Component {
 			totalItemsCount: null
     }
     this.handlePageChange = this.handlePageChange.bind(this)
+    this.editUser = this.editUser.bind(this)
+    this.deleteUser = this.deleteUser.bind(this)
   }
   
   handlePageChange(pageNumber) {
@@ -43,11 +46,28 @@ class UserList extends Component {
   }
   
   editUser(id) {
-    console.log(id, 'edit')
+    this.props.history.push('user/'+id+'/edit')
   }
 
-  deleteUser(id) {
-    console.log(id, 'delete')
+  deleteUser(user) {
+    console.log(user, 'delete')
+    Swal.fire({
+			title: 'Delete ' + user.name,
+			text: "You won't be able to revert this!",
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, delete it!'
+		}).then((result) => {
+			if (result.value) {
+				var form = new FormData();
+				form.append('id', user._id);
+				this.props.deleteSelectedUser(form, this.props.history)
+				/********** GET PETS LIST **********/
+				this.props.getAllUsers(1)
+			}
+		})
   }
   
   render() { 
@@ -60,8 +80,8 @@ class UserList extends Component {
         const listUsers = users.map((user,index) => {
           return (
             <UserListElement
-              editUser={() => this.props.editUser } 
-              deleteUser={() => this.props.deleteUser }
+              editUser={(id) => props.editUser(id) } 
+              deleteUser={(user) => props.deleteUser(user) }
               index={ index }
               key={ index }
               user={ user }
@@ -131,37 +151,6 @@ class UserList extends Component {
                   itemClass="page-item"
                   linkClass="page-link"
                 />
-                  {/* <div className="requests">
-                  { userList && userList.length > 0 &&
-                    <table className="table table-bordered table-hover bg-white" width="100%">
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                  {userList && userList.length > 0 && userList.map((user, index) => {
-                    return(
-                      <UserListElement 
-                        editUser={this.editUser} 
-                        deleteUser={this.deleteUser}
-                        index={index} 
-                        key={index} 
-                        user={user} 
-                      />
-                    )
-                      }) 
-                  }
-                  </tbody>
-                  </table>
-                  }
-                  </div> */}
-                  <div className="card dash-main-card">
-                  </div>
                 </div>
               </div>
             </div>
@@ -185,4 +174,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors
 })
 
-export  default withRouter(connect(mapStateToProps, { getAllUsers })(UserList))
+export  default withRouter(connect(mapStateToProps, { getAllUsers, deleteSelectedUser })(UserList))

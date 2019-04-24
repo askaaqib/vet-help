@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_ERRORS, GET_ALL_USERS, TOTAL_PAGES } from '../types';
+import { GET_ERRORS, GET_ALL_USERS, TOTAL_PAGES, USER_EDIT_SHOW } from '../types';
 
 export const getAllUsers = (page) => dispatch => {
   axios.get('/api/getAllUsers', {
@@ -8,11 +8,7 @@ export const getAllUsers = (page) => dispatch => {
     }
     })
     .then(res => {
-      // console.log(res.data)
-      // var  userList = res.data.message;
-      // var totalpage = res.data.pages
         dispatch(setAllUser(res.data));
-        // dispatch(totalPage(totalpage))
     })
     .catch(err => {
       if(err) {
@@ -22,6 +18,44 @@ export const getAllUsers = (page) => dispatch => {
         });
       }
     });
+}
+/********* UPDATE USER *********/
+export const updateUser = (user, history) => dispatch => {
+	axios.post('/api/updateuser', user).then(res => {
+		history.push('/userlist')
+	})
+	.catch(err => {
+		dispatch({
+			type: GET_ERRORS,
+			payload: err.response.data
+		});
+	});
+}
+
+/********* GET USER BY ID METHOD *********/
+export const getUserDetails = (userId) => dispatch => {
+	axios.get('/api/usershow', {
+		params: {
+			id: userId
+		}
+	}).then(res => {
+		dispatch(setUserShowById(res.data[0]))
+	})
+}
+
+/********* DELETE SELECTED USER *********/
+export const deleteSelectedUser = (user, history) => dispatch => {
+	axios.post('/api/deleteuser', user).then(res => {
+		history.push('/userlist')
+	})
+}
+
+/********  SELECTED USER SHOW DISPATCH ********/
+export const setUserShowById = showUser => {
+	return {
+		type: USER_EDIT_SHOW,
+		showUser: showUser
+	}
 }
 
 export const setAllUser = userList => {
