@@ -7,6 +7,8 @@ import Peer from 'simple-peer';
 // import queryString from 'query-string'
 // import Spinner from 'react-bootstrap/Spinner'
 import { getRequestDetails } from '../actions/admin/requests'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPause, faStop } from '@fortawesome/free-solid-svg-icons'
 
 const APP_KEY = '92e8a4cbd51aaee54132';
 
@@ -16,6 +18,9 @@ class RequestHelp extends Component {
 		this.state = {
 			hasMedia: false,
 			otherUserid: null,
+			btnPause: true,
+			btnResume: false,
+			btnFinish: true
 			// loader: false,
 			// userType: null
 		}
@@ -161,14 +166,25 @@ class RequestHelp extends Component {
 	}
 
 	pauseCall() {
+		this.setState({
+			btnPause: false,
+			btnResume: true
+		})
 		this.myVideo.pause()
 	}
 	
 	resumeCall() {
+		this.setState({
+			btnPause: true,
+			btnResume: false
+		})
 		this.myVideo.play()
 	}
 
 	render() { 
+		const { btnPause } = this.state
+		const { btnResume } = this.state
+		const { btnFinish } = this.state
 		// const { loader } = this.state
 		// const { userType } = this.state
 		return ( 
@@ -184,8 +200,20 @@ class RequestHelp extends Component {
 						</div>
 						<div className="video-options text-center">
 							<div className="container">
-								<button onClick={ this.pauseCall }>Pause</button>
-								<button onClick={ this.resumeCall }>Resume</button>
+								{ btnPause &&
+									(
+										<button className="btn-custom btn-call" onClick={ this.pauseCall }>
+											<span>Pause</span>
+										</button>
+									)
+								}
+								{ btnResume &&
+									(
+										<button className="btn-custom btn-call" onClick={ this.resumeCall }>
+											<span>Resume</span>
+										</button>
+									)
+								}
 							</div>
 						</div>          
 					</div>

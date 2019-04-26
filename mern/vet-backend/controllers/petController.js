@@ -62,22 +62,6 @@ export const updatePet = async (req, res)  => {
 	if(!isValid) {
 		return res.status(400).json(errors);
 	}
-	const toUpdate = {
-		_id: req.body.id,
-		name: req.body.name,
-		type: req.body.type,
-		age: req.body.age,
-		breed: req.body.breed
-		};
-
-	if (req.body.imageEdit) {
-		if (req.files.image) {
-			var oldpath = req.files.image.file
-			filename = Date.now() + '-' + req.files.image.filename
-			var newpath = '../react/public/images/pets/' + filename
-			toUpdate.push({ image: filename })
-		}
-	}
 
 	Pet.findById(req.body.id, function(err, pet) {
     if (!pet)
@@ -86,6 +70,25 @@ export const updatePet = async (req, res)  => {
 				pet.name = req.body.name;
 				pet.breed = req.body.breed;
 				pet.age = req.body.age;
+				pet.type = req.body.type;
+				if(req.files.newImage) {
+					/* REMOVE OLD IMAGE */
+					if(req.body.image) {
+						if(fs.existsSync('../react/public/images/pets/' + req.body.image)) {
+							fs.unlinkSync('../react/public/images/pets/' + req.body.image)
+						}
+					}
+					var oldpath = req.files.newImage.file
+					/*  UPLOAD NEW IMAGE */
+					var filename = Date.now() + '-' + req.files.newImage.filename
+					var newpath = '../react/public/images/pets/' + filename
+					fs.createReadStream(oldpath);
+					var readerStream = fs.createReadStream(oldpath);
+					var writerStream = fs.createWriteStream(newpath);
+					readerStream.pipe(writerStream);
+					/* UPDATE NEW IMAGE FILE */
+					pet.image = filename
+				}
         pet.save().then(pet => {
           res.json('Update complete');
       })
@@ -112,11 +115,31 @@ export const deletePet = async (req, res) => {
 	Pet.findById(petId, function (err, pet) {
 		// GET CHATS DATA AND REMOVE CHATS RELATED TO PET
 		var chats = pet._chat
+		Chat.find({ _id: { $in: chats}}, function(err, res) {
+			res.map(data => {
+				if(data.images && data.images.length > 0) {
+					data.images.map(image => {
+						if(fs.existsSync('../react/public/images/chats/' + image.name)) {
+							fs.unlinkSync('../react/public/images/chats/' + image.name)
+						}
+					})
+				}
+				if(data.videos && data.videos.length > 0) {
+					data.videos.map(video => {
+						if(fs.existsSync('../react/public/images/chats/' + video)) {
+							fs.unlinkSync('../react/public/images/chats/' + video)
+						}
+					})
+				}
+			})
+		})
 		Chat.deleteMany({ _id: { $in: chats}}, (err, chats) => {})
 		// REMOVE PET
 		pet.remove().then(pet => {
 			if (petImage) {
-				fs.unlinkSync('../react/public/images/pets/' + petImage)
+				if(fs.existsSync('../react/public/images/pets/' + petImage)) {
+					fs.unlinkSync('../react/public/images/pets/' + petImage)
+				}
 			}
 			res.json(pet)
 		})

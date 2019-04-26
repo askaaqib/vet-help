@@ -49,25 +49,27 @@ class RequestList extends Component {
           <SideBar />
           <div id="page-content-wrapper">
             <div className="container-fluid request-help">
-              <div className="row">
-                <div className="col-md-6">
-                  <RequestHelp setClick={click => this.clickChild = click} />
+              <div style={{display: this.state.showChatDialog ? 'block' : 'none' }}>
+                <div className="row">
+                  <div className="col-md-6">
+                    <RequestHelp setClick={click => this.clickChild = click} />
+                  </div>
+                  <div className="col-md-6 notes pt-3">
+                    <CaseNotes requestDetails={requestDetails}></CaseNotes>
+                  </div>
                 </div>
-                <div className="col-md-6 notes pt-3">
-                  <CaseNotes requestDetails={requestDetails}></CaseNotes>
+                <div className="row mt-2">
+                  <div className="col-md-12">
+                    {requestDetails && 
+                      (
+                        <RequestDetails requestDetails={requestDetails} />
+                      )
+                    }
+                  </div>
                 </div>
               </div>
-              <div className="row mt-2">
-                <div className="col-md-12">
-                  {requestDetails && 
-                    (
-                      <RequestDetails requestDetails={requestDetails} />
-                    )
-                  }
-                </div>
-              </div>
-              <h1 className="mt-4">Request List</h1>
-               <div className="">
+              <div style={{display: this.state.showChatDialog ? 'none' : 'block' }}>
+                <h1 className="mt-4">Request List</h1>
                 <div className=" mt-5">
                   <div className="requests">
                   { requestList.length > 0 ?

@@ -7,7 +7,7 @@ import UserListElement from './UserListElement';
 import Pagination from "react-js-pagination";
 import { withRouter } from 'react-router'
 import Swal from 'sweetalert2'
-
+import MediaHandler from '../../MediaHandler'
 class UserList extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +18,7 @@ class UserList extends Component {
     this.handlePageChange = this.handlePageChange.bind(this)
     this.editUser = this.editUser.bind(this)
     this.deleteUser = this.deleteUser.bind(this)
+		this.mediaHandler = new MediaHandler();
   }
   
   handlePageChange(pageNumber) {
@@ -29,8 +30,25 @@ class UserList extends Component {
 			this.props.history.push('/login');
     }
     this.props.getAllUsers(1)
+    this.mediaHandler.getPermissions()
+			.then((stream) => {
+        
+				try {
+					var srcObject = stream;
+				} catch (e) {
+					var srcObject  = window.URL.createObjectURL(stream);
+        }
+        
+        var tracks = srcObject.getTracks();  // if only one media track
+        console.log(tracks)
+        tracks.forEach(function(track) {
+          track.stop();
+        });
+      
+        srcObject = null;
+      })
   }
-
+  
   componentWillReceiveProps(props) {
 		if (props) {
 			var currentPage = props.users.userList.current

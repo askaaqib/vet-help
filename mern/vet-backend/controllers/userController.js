@@ -10,6 +10,7 @@ const User = require('../models/User')
 const Pet = require('../models/Pet')
 const Chat = require('../models/Chat')
 const Pusher = require('pusher');
+var fs = require('fs');
 
 var pageNo = 1
 var size = 10
@@ -245,7 +246,30 @@ export const deleteUser = async (req, res) => {
 				Pet.findById(petId, function (err, pet2) {
 					// GET CHATS DATA AND REMOVE CHATS RELATED TO PET
 					var chats = pet2._chat
-					Chat.deleteMany({ _id: { $in: chats}}, (err, chats) => {})
+					Chat.find({ _id: { $in: chats}}, function(err, res) {
+						res.map(data => {
+							if(data.images && data.images.length > 0) {
+								data.images.map(image => {
+									if(fs.existsSync('../react/public/images/chats/' + image.name)) {
+										fs.unlinkSync('../react/public/images/chats/' + image.name)
+									}
+								})
+							}
+							if(data.videos && data.videos.length > 0) {
+								data.videos.map(video => {
+									if(fs.existsSync('../react/public/images/chats/' + video)) {
+										fs.unlinkSync('../react/public/images/chats/' + video)
+									}
+								})
+							}
+						})
+					})
+					Chat.deleteMany({ _id: { $in: chats}}, (err, chatt) => {})
+					if(pet2.image) {
+						if(fs.existsSync('../react/public/images/pets/' + pet2.image)) {
+							fs.unlinkSync('../react/public/images/pets/' + pet2.image)
+						}
+					}
 					// REMOVE PET
 					pet2.remove()
 				})

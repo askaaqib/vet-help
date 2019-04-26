@@ -24,12 +24,12 @@ class RequestListElement extends Component {
           >
             Start
           </button>
-          <button
+          {/* <button
             onClick={() => this.props.declineRequest(request._id)}
             className="btn btn-primary"
           >
             Reject
-          </button>
+          </button> */}
         </td>
       </tr>
      );

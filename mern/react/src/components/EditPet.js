@@ -19,7 +19,7 @@ class CreateProfile extends Component {
 				age: '',
 				type: '',
         image: '',
-        imageEdit: false,
+        newImage: null,
 				errors: {}
 			}
 		this.handleInputChange = this.handleInputChange.bind(this)
@@ -55,11 +55,11 @@ class CreateProfile extends Component {
 	handleInputChange(e) {
 		if (e.target.files) {
       this.setState({
-        imageEdit: true
+        newImage: e.target.files[0]
       })
-			this.setState({
-				[e.target.name]: e.target.files[0]
-			})	
+			// this.setState({
+			// 	[e.target.name]: e.target.files[0]
+			// })	
 		} else {
 			this.setState({
 				[e.target.name]: e.target.value
@@ -76,7 +76,7 @@ class CreateProfile extends Component {
 		form.append("age", this.state.age);
 		form.append("type", this.state.type);
     form.append("image", this.state.image);
-    form.append("imageEdit", this.state.imageEdit)
+    form.append("newImage", this.state.newImage)
 		this.props.updatePetProfile(form, this.props.history);
 	}
 		

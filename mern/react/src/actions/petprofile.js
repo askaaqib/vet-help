@@ -46,7 +46,7 @@ export const registerPetChat = (pet, history) => dispatch => {
 			})
 			// history.push('/requesthelp?type=user&session='+ res.data._id)
 			history.push('/requesthelp')
-			// window.location.reload()
+			window.location.reload()
 		})
 		.catch(err => {
 			dispatch({
