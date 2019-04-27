@@ -246,7 +246,7 @@ class PetRegister extends Component {
 												{ errors.problem && (<div className="invalid-feedback">{errors.problem}</div>) }
                       </div>
                       <div className="row form-group">
-                        <h4>How long { selectedPet.name } has this problem?</h4>
+                        <h4>How long has { selectedPet.name } had this problem?</h4>
                         <input
                           type="text"
 													className={ classnames('form-control', {'is-invalid': errors.problem_duration})}
@@ -257,7 +257,7 @@ class PetRegister extends Component {
 												{ errors.problem_duration && (<div className="invalid-feedback">{errors.problem_duration}</div>) }
                       </div>
                       <div className="row form-group">
-                        <h4>{ selectedPet.name } has been eating (including all medication and supplements):</h4>
+                        <h4> What has { selectedPet.name } been eating? (including all medication and supplements):</h4>
                         <input
                           type="text"
 													className={ classnames('form-control', {'is-invalid': errors.eating})}
