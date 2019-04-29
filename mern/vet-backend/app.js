@@ -45,6 +45,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 // set the port
 const port = process.env.PORT || 3001;
 // connect to database
+// serve up static assets (usually on heroku)
+if(process.env.NODE_ENV === "production") {
+  app.use(express.static("../react/build"))
+}
 mongoose.Promise = global.Promise;
 mongoose.connect(config.DB, { useNewUrlParser: true }).then(
   () => {console.log('Database is connected') },
